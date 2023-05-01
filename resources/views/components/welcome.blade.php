@@ -1,8 +1,9 @@
+<!--
 <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
     <x-application-logo class="block h-12 w-auto" />
 
     <h1 class="mt-8 text-2xl font-medium text-gray-900">
-        Welcome to your Jetstream application!
+        qWelcome to your Jetstream application!
     </h1>
 
     <p class="mt-6 text-gray-500 leading-relaxed">
@@ -93,4 +94,6 @@
             Authentication and registration views are included with Laravel Jetstream, as well as support for user email verification and resetting forgotten passwords. So, you're free to get started with what matters most: building your application.
         </p>
     </div>
-</div>
+<div>
+-->
+<p>This is ..</p>

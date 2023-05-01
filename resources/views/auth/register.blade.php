@@ -9,11 +9,6 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
-
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
@@ -27,6 +22,26 @@
             <div class="mt-4">
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            </div>
+
+            <div>
+                <x-label for="salutation" value="{{ __('Title') }}" />
+                <x-input id="salutation" class="block mt-1 w-full" type="text" name="salutation" :value="old('salutation')" required autofocus autocomplete="salutation" />
+            </div>
+
+            <div>
+                <x-label for="fname" value="{{ __('First Name') }}" />
+                <x-input id="fname" class="block mt-1 w-full" type="text" name="fname" :value="old('fname')" required autofocus autocomplete="fname" />
+            </div>
+
+            <div>
+                <x-label for="lname" value="{{ __('Last Name') }}" />
+                <x-input id="lname" class="block mt-1 w-full" type="text" name="lname" :value="old('lname')" required autofocus autocomplete="lname" />
+            </div>
+
+            <div>
+                <x-label for="assoc" value="{{ __('Association') }}" />
+                <x-input id="assoc" class="block mt-1 w-full" type="text" name="assoc" :value="old('assoc')" required autofocus autocomplete="assoc" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())

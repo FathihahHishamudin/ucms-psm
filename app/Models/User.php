@@ -28,8 +28,8 @@ class User extends Authenticatable
         'Last_name',
         'Salutation',
         'Association',
-        'Email',
-        'Password',
+        'email',
+        'password',
     ];
 
     /**
