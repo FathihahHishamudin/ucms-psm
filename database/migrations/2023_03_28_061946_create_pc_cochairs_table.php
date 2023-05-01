@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pc_cochairs', function (Blueprint $table) {
-            $table->id('CoChair_id')->primary();
+            $table->id('CoChair_id');
             $table->string('User_id')->constraint('users')->onDelete("cascade");
             $table->string('Conference_id')->constraint('conferences')->onDelete("cascade");
             $table->string('Co_status');

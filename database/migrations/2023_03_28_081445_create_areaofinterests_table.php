@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('area_of_interests', function (Blueprint $table) {
-            $table->id('AoI_id')->primary();
+            $table->id('AoI_id');
             $table->string('Conference_id')->constraint('conferences')->onDelete("cascade");
             $table->string('AoI_name');
             $table->timestamps();

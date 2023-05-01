@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('papers', function (Blueprint $table) {
-            $table->id('Paper_id')->primary();
+            $table->id('Paper_id');
             $table->string('Author_id')->constraint('authors')->onDelete('cascade');
             $table->string('Conference_id')->constraint('conferences')->onDelete('cascade');
             $table->string('Paper_title');

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->id('Review_id')->primary();
+            $table->id('Review_id');
             $table->string('Paper_id')->constraint('papers')->onDelete("cascade");
             $table->string('Reviewer_id')->constraint('reviewers');
             $table->integer('Review_Originality');

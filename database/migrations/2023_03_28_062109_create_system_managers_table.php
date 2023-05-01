@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('system_managers', function (Blueprint $table) {
-            $table->id('Manager_id')->primary();
+            $table->id('Manager_id');
             $table->string('Email')->unique();
             $table->string('Password');
             $table->timestamps();

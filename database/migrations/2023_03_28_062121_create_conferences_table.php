@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('conferences', function (Blueprint $table) {
-            $table->id('Conference_id')->primary();
+            $table->id('Conference_id');
             $table->string('Conference_org');
             $table->string('Conference_website');
             $table->string('Conference_status');
