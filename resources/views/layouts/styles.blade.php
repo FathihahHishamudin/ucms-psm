@@ -26,6 +26,8 @@
             padding: 15px 25px 50px 25px;
         }
 
+        p {font-size: 20px;}
+
         .header-line{
             border-bottom: #872D4A solid 3px;
         }
@@ -44,7 +46,7 @@
             color: black;
         }
 
-        p a {font-weight: bold; color: #0A5194; }
+        p a {font-weight: bold; color: #0A5194; text-decoration-line: underline;}
 
         #register-container{
             margin: 80px 40px 60px 70px;
@@ -72,6 +74,24 @@
         .form1-input2{
             flex: initial;
             width: 73%;
+        }
+
+        #login-container {
+            width: 50%;
+            margin: auto;
+            margin-top: 80px;
+            margin-bottom: 60px;
+            color:#3a0000;
+        }
+
+        .form-login-label{
+            flex: initial;
+            width: 30%;
+            vertical-align: middle;
+        }
+
+        .form-login-input{
+            flex-grow: 1;
         }
 
         .button-submit{
