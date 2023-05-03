@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('system_managers', function (Blueprint $table) {
-            $table->id('Manager_id');
-            $table->string('Email')->unique();
-            $table->string('Password');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('role')->default(0);
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('system__managers');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

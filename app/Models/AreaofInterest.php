@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AreaofInterest extends Model
 {
     use HasFactory;
+    public $table = 'area_of_interests';
+    protected $fillable = ['Conference_id',
+                            'AoI_name'];
 }

@@ -46,6 +46,10 @@
             color: black;
         }
 
+        .red-font{
+            color: #3a0000;
+        }
+
         p a {font-weight: bold; color: #0A5194; text-decoration-line: underline;}
 
         #register-container{
@@ -96,6 +100,23 @@
 
         .button-submit{
             background-color: #D9D9D9;
+        }
+
+        .dashboard-page{
+            margin: 50px 0px 0px 50px;
+        }
+
+        .dashboard-u{
+            border-bottom: #cfb5b5 solid 2px;
+        }
+        
+        .listrole{
+            border: black solid 1px;
+            width: 90%;
+            margin: auto;
+            padding: 3px 10px 3px 10px;
+            font-size: 18px;
+            color: black;
         }
 </style>
 

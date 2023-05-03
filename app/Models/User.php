@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Model\PC_Chair;
 
 class User extends Authenticatable
 {
@@ -61,4 +62,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function pcchair(){
+        return $this->hasMany(PC_Chair::class);
+    }
 }
