@@ -17,7 +17,7 @@
             <div class="role">
                 <div class="menu dashboard-u">
                     <div class="red-font text-xl">PC-Chair</div>
-                    <div class="red-font text-xl font-bold underline">Create Your Conference</div>
+                    <a class="red-font text-xl font-bold underline" href="{{url('/create-conf')}}">Create Your Conference</a>
                 </div>
                 <div class="mb-4 mt-2 ml-lg-5">
                     @foreach($chairs as $chairs)
