@@ -17,10 +17,17 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
-Route::get('/', 'App\Http\Controllers\ConferenceController@index');
+Route::get('/', 'App\Http\Controllers\ConferenceController@list');
 
 Route::get('/create-conf', function () {return view('chair.createconfform');});
 Route::post('/create-conf', 'App\Http\Controllers\ConferenceController@create');
+
+Route::get('/conf/{conf}', 'App\Http\Controllers\ConferenceController@show');
+Route::get('/conf/{conf}/contactus', 'App\Http\Controllers\ConferenceController@contact');
+Route::get('/conf/{conf}/committeemenu', 'App\Http\Controllers\ConferenceController@comenu');
+
+Route::get('/conf/{conf}/committeemenu/updateconf', 'App\Http\Controllers\ConferenceController@edit');
+Route::put('/conf/{conf}/committeemenu/updateconf', 'App\Http\Controllers\ConferenceController@update');
 
 Route::middleware([
     'auth:sanctum',

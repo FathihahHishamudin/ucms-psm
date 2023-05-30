@@ -83,32 +83,44 @@
             <div id="ucms">UTM CONFERENCE MANAGEMENT SYSTEM</div>
         </div>
         <div class="right-menu">
-            <div class="hiname">
-                Hi <b>{{Auth::user()->First_name}} {{Auth::user()->Last_name}}</b>
-            </div>
-            <div class="links">
-                @if (request()->route()->getName() == 'dashboard')
-                    <div class="myprofile">
-                        <a href="{{ route('profile.show') }}">{{ __('My Profile') }}</a>
-                    </div>
-                @else
-                <div class="mydashboard">
-                        <a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
-                    </div>
-                @endif
-                <b class="px-2">|</b>
-                <div class="logout">
-                    <form method="POST" action="{{ route('logout') }}" x-data>
-                        @csrf
-
-                        <a href="{{ route('logout') }}"
-                            @click.prevent="$root.submit();">
-                                {{ __('Log Out') }}
-                        </a>
-                    </form>
-                    
+            @auth
+                <div class="hiname">
+                    Hi <b>{{Auth::user()->First_name}} {{Auth::user()->Last_name}}</b>
                 </div>
-            </div>
+                <div class="links">
+                    @if (request()->route()->getName() == 'dashboard')
+                        <div class="myprofile">
+                            <a href="{{ route('profile.show') }}">{{ __('My Profile') }}</a>
+                        </div>
+                    @else
+                    <div class="mydashboard">
+                            <a href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
+                        </div>
+                    @endif
+                    <b class="px-2">|</b>
+                    <div class="logout">
+                        <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf
+
+                            <a href="{{ route('logout') }}"
+                                @click.prevent="$root.submit();">
+                                    {{ __('Log Out') }}
+                            </a>
+                        </form>
+                        
+                    </div>
+                </div>
+            @else
+                <div class="links">
+                    <div class="myprofile">
+                        <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </div>
+                    <b class="px-2">|</b>
+                    <div class="mydash">
+                        <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </div>
+                </div>
+            @endauth
         </div>
     </div>
 </div>

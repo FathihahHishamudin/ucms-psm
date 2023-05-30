@@ -10,6 +10,7 @@ class Conference extends Model
 {
     use HasFactory;
     public $table = 'conferences';
+    protected $primaryKey = 'Conference_id';
     protected $fillable = ['Conference_org', 
                            'Conference_website',
                            'Conference_status',

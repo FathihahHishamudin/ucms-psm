@@ -6,7 +6,7 @@
 
     
     <body>
-        <div>
+        <!--<div>
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
@@ -20,7 +20,7 @@
                     @endauth
                 </div>
             @endif            
-        </div>
+        </div>-->
         <div class="container-tengah">
             <div class="header-line">
                 <div class="header-font">ACTIVE CONFERENCES</div>
@@ -33,13 +33,13 @@
                 </tr>
                 @foreach($conf as $conf)
                 <tr>
-                    <td>{{$conf->Conference_name}}</td>
-                    <td>{{$conf->Conference_date}}</td>
+                    <td><a href="{{ url('/conf/'.$conf->Conference_abbr) }}">{{$conf->Conference_name}}</a></td>
+                    <td><a href="{{ url('/conf/'.$conf->Conference_abbr) }}">{{$conf->Conference_date}}</a></td>
                 </tr>
                 @endforeach
                 @forelse ($conf as $conf)
                     @empty
-                    <tr>There is no activ</tr>
+                    <tr>There is no active conference</tr>
                 @endforelse
             </table>
             
