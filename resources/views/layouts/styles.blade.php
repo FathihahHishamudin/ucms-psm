@@ -118,5 +118,28 @@
             font-size: 18px;
             color: black;
         }
+
+        #confe {
+            border-collapse:collapse;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        #confe td, #confe th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #confe tr:nth-child(even){background-color: #f2f2f2;}
+
+        #confe th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #3a0000;
+            color: white;
+            font-size: 20px;
+        }
 </style>
 

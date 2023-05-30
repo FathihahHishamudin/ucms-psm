@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Route::get('/', 'App\Http\Controllers\ConferenceController@index');
+
+Route::get('/create-conf', function () {return view('chair.createconfform');});
+Route::post('/create-conf', 'App\Http\Controllers\ConferenceController@create');
 
 Route::middleware([
     'auth:sanctum',
