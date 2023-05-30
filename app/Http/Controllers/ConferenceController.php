@@ -155,6 +155,7 @@ class ConferenceController extends Controller
                 "Conference_venue" => $request->venue,
                 "Conference_desc" => $request->description,
                 "Conference_org" => $request->org,
+                "Conference_announcement" => $request->announcement,
             ]);
 
             return redirect()->back()->with('success', 'Conference updated successfully.');

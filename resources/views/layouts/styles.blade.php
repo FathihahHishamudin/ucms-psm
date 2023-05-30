@@ -80,6 +80,23 @@
             width: 73%;
         }
 
+        #create-conf-container{
+            margin: 80px 40px 60px 70px;
+            color: #3a0000;
+        }
+
+        .form2-label{
+            flex: initial;
+            width: 40%;
+            vertical-align: middle;
+        }
+
+        .form2-input{
+            flex: initial;
+            width: 60%;
+            margin-right: 3%;
+        }
+
         #login-container {
             width: 50%;
             margin: auto;

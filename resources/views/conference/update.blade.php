@@ -68,8 +68,11 @@
                         <label for="web"><b>Conference Organization Website</b></label>
                         <input type="text" name="web" value="{{$conf->Conference_website }}" class="form-control" placeholder="Conference Website">
                     </div>
-
-
+                    <!--Conference's  Announcement-->
+                    <div class="form-group mb-3">
+                        <label for="announcement"><b>Conference Announcement</b></label>
+                        <textarea class="form-control" rows="4" name="announcement" placeholder="Conference Announcement">{{$conf->Conference_announcement}}</textarea>
+                    </div>
 
                     <!-- Save change button -->
                     <div class="flex items-center justify-center mt-4">
