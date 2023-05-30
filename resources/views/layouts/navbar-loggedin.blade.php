@@ -78,7 +78,7 @@
     <div class="menu">
         <div class="left-menu">
             <div class="ulogo">
-            <img src="image/UTMlogo2.png" alt="UTM Logo" width="200px" class="center">
+            <a href="{{ url('/') }}"><img src="image/UTMlogo2.png" alt="UTM Logo" width="200px" class="center"></a>
             </div>
             <div id="ucms">UTM CONFERENCE MANAGEMENT SYSTEM</div>
         </div>

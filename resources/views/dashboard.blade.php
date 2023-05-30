@@ -27,7 +27,9 @@
                                 <tr>
                                     @php $confname = App\Http\Controllers\DashboardController::getConferenceName($chairs->Conference_id);
                                     @endphp
-                                    <div class="listrole">{{$confname}}</div>
+                                    @php $confabbr = App\Http\Controllers\DashboardController::getConferenceAbbr($chairs->Conference_id);
+                                    @endphp
+                                    <div class="listrole"><a href="{{ url('/conf/'.$confabbr) }}">{{$confname}}</a></div>
                                 </tr>
                             </tbody>
                         </table>

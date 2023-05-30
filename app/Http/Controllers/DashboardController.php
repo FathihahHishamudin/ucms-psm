@@ -48,4 +48,12 @@ class DashboardController extends Controller
         //$confname->where('Conference_id', $id)->value('Conference_name');
         return $confname;
     }
+
+    public static function getConferenceAbbr($id){
+        //$confname = Conference::query();
+        //$confname = Conference::select('Conference_name')->where('Conference_id', $id)->first();
+        $confabbr = DB::table('conferences')->where('Conference_id', $id)->value('Conference_abbr');    
+        //$confname->where('Conference_id', $id)->value('Conference_name');
+        return $confabbr;
+    }
 }
