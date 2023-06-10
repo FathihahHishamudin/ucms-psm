@@ -5,9 +5,7 @@
     .dropbtn {
     background-color: #9d6567;
     color: white;
-    font-size: 16px;
     border: none;
-    font-size: 36px;
     width: 100%;
     border-radius: 29.5px;
     text-transform: uppercase;
@@ -32,6 +30,21 @@
     border-radius: 29.5px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    }
+
+    .column {
+        float: left;
+    }
+
+    .column.side {
+        width: 15%;
+        font-size: 22px;
+        margin-top: 1%;
+    }
+
+    .column.middle {
+        width: 70%;
+        font-size: 36px;
     }
 
     /* Links inside the dropdown */

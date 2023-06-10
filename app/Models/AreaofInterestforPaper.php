@@ -9,6 +9,7 @@ class AreaofInterestforPaper extends Model
 {
     use HasFactory;
     public $table = 'area_of_interest_papers';
+    protected $primaryKey = 'AoIp_id';
     protected $fillable = ['Conference_id',
                             'AoI_name'];
 }

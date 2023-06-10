@@ -20,11 +20,11 @@ return new class extends Migration
             $table->string('Conference_status')->default('Pending');
             $table->string('Conference_name');
             $table->string('Conference_abbr');
-            $table->string('Conference_desc')->nullable();
+            $table->string('Conference_desc', 900)->nullable();
             $table->string('Conference_venue');
             $table->string('Conference_time')->nullable();
             $table->string('Conference_date');
-            $table->string('Conference_announcement')->nullable();
+            $table->string('Conference_announcement', 900)->nullable();
             $table->timestamps();
         });
     }

@@ -9,6 +9,7 @@ class Reviews extends Model
 {
     use HasFactory;
     public $table = 'reviews';
+    protected $primaryKey = 'Review_id';
     protected $fillable = [
         'Paper_id',
         'Reviewer_id',

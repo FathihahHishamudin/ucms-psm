@@ -9,6 +9,7 @@ class Payment extends Model
 {
     use HasFactory;
     public $table = 'payments';
+    protected $primaryKey = 'Payment_id';
     protected $fillable = [
         'Conference_id',
         'Fee_id',

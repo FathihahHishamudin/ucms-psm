@@ -5,14 +5,22 @@
 @section('content')
 <body>
     <div class="dropdown">
-        <button class="dropbtn">{{$conf->Conference_name}}</button>
+    <button class="dropbtn">
+            <div class="column side"></div>
+            <div class="column middle">{{$conf->Conference_name}}</div>
+            @auth
+                @if($cfrole != null)
+                    <div class="column side">[ {{$cfrole}} ]</div>
+                @endif
+            @endauth
+        </button>
         <div class="dropdown-content">
             <a href="{{ url('/conf/'.$conf->Conference_abbr)}}">HOME</a>
             <a href="#">REGISTRATION</a>
             <a href="{{ url('/conf/'.$conf->Conference_abbr).'/contactus' }}">CONTACT US</a>
-            @auth
+            @if ($cfrole=="CHAIR" or $cfrole=="CO-CHAIR" or $cfrole=="REVIEWER")
                 <a href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu' }}">COMMITTEE MENU</a>
-            @endauth
+            @endif
         </div>
     </div>
 

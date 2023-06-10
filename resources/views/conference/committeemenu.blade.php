@@ -5,14 +5,22 @@
 @section('content')
 <body>
     <div class="dropdown">
-        <button class="dropbtn">{{$conf->Conference_name}}</button>
+    <button class="dropbtn">
+            <div class="column side"></div>
+            <div class="column middle">{{$conf->Conference_name}}</div>
+            @auth
+                @if($cfrole != null)
+                    <div class="column side">[ {{$cfrole}} ]</div>
+                @endif
+            @endauth
+        </button>
         <div class="dropdown-content">
             <a href="{{ url('/conf/'.$conf->Conference_abbr)}}">HOME</a>
             <a href="#">REGISTRATION</a>
             <a href="{{ url('/conf/'.$conf->Conference_abbr).'/contactus' }}">CONTACT US</a>
-            @auth
+            @if ($cfrole=="CHAIR" or $cfrole=="CO-CHAIR" or $cfrole=="REVIEWER")
                 <a href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu' }}">COMMITTEE MENU</a>
-            @endauth
+            @endif
         </div>
     </div>
 
@@ -21,8 +29,14 @@
         <div class="header-line">
             <div class="header-font">COMMITTE MENU</div>
         </div>
-
-        <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/updateconf' }}">UPDATE CONFERENCE DETAILS</a>
+        <div class="pcmenu">
+            @if($cfrole == "CHAIR" or $cfrole == "CO-CHAIR")
+                <div class="pcmenu list">
+                    <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/updateconf' }}"><i class="bi bi-pencil-square">   </i>UPDATE CONFERENCE DETAILS</a>
+                </div>
+            @endif
+        </div>
+        
         
     </div>
 </body>
