@@ -6,7 +6,9 @@
 <body>
     <div class="dropdown">
     <button class="dropbtn">
-            <div class="column side"></div>
+            <div class="column side">
+                <i class="bi bi-caret-down-fill" style="font-size: 30px; float:right; padding-top:3%"></i>
+            </div>
             <div class="column middle">{{$conf->Conference_name}}</div>
             @auth
                 @if($cfrole != null)

@@ -1,6 +1,13 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&display=swap');
     
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        margin: auto;
+        width: 60%;
+        position: relative;
+    }
+
     /* Dropdown Button */
     .dropbtn {
     background-color: #9d6567;
@@ -9,13 +16,6 @@
     width: 100%;
     border-radius: 29.5px;
     text-transform: uppercase;
-    }
-
-    /* The container <div> - needed to position the dropdown content */
-    .dropdown {
-        margin: auto;
-        width: 60%;
-        position: relative;
     }
 
     /* Dropdown Content (Hidden by Default) */
