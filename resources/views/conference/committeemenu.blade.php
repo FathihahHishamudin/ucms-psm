@@ -32,8 +32,25 @@
         <div class="pcmenu">
             @if($cfrole == "CHAIR" or $cfrole == "CO-CHAIR")
                 <div class="pcmenu list">
-                    <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/updateconf' }}"><i class="bi bi-pencil-square">   </i>UPDATE CONFERENCE DETAILS</a>
+                    <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/updateconf' }}"><i class="bi bi-pencil-square"></i><b>&nbsp; &nbsp; Update Conference Details</b></a>
                 </div>
+                <div class="pcmenu list">
+                    <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/fees' }}"><i class="bi bi-cash-coin"></i><b>&nbsp; &nbsp; Conference Fees</b></a>
+                </div>
+                <div class="pcmenu list">
+                    <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/participants' }}"><i class="bi bi-people-fill"></i><b>&nbsp; &nbsp; Conference Participants</b></a>
+                </div>
+                <div class="pcmenu list">
+                    <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/updateconf' }}"><i class="bi bi-file-earmark-text-fill"></i><b>&nbsp; &nbsp; Conference Papers</b></a>
+                </div>
+                <div class="pcmenu list">
+                    <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/updateconf' }}"><i class="bi bi-person-lines-fill"></i><b>&nbsp; &nbsp; Conference Reviewers</b></a>
+                </div>
+                @if($cfrole == "CHAIR")
+                    <div class="pcmenu list">
+                        <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/updateconf' }}"><i class="bi bi-person-check-fill"></i><b>&nbsp; &nbsp; Conference Co-Chairs</b></a>
+                    </div>
+                @endif
             @endif
         </div>
         

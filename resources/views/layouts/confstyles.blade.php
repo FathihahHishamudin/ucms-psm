@@ -104,6 +104,8 @@
         margin-top: 40px;
     }
 
+/********************** START. ON CONFERENCE DISPLAY. THE ANNOUNCEMENT BOX **********************/    
+ 
     .annou {
         margin: 0;
         background-color: #171618;
@@ -197,5 +199,24 @@
             transform: translateY(-100%);
         }
     }
+
+/********************** END. ON CONFERENCE DISPLAY. THE ANNOUNCEMENT BOX **********************/       
+
+/********************** START. COMMITTEE MENU. **********************/
+
+    .pcmenu
+    {
+        width: 90%;
+        margin: auto;
+        padding-top: 40px;
+    }
+
+    .pcmenu.list
+    {
+        padding: 15px 0px;
+        border-bottom: 1px solid lightgray;
+    }
+
+
 
 </style>
