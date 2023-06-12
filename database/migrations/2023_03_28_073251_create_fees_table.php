@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('fees', function (Blueprint $table) {
             $table->id('Fee_id');
             $table->string('Conference_id')->constraint('conferences')->onDelete("cascade");
+            $table->string('Type');
             $table->string('Fee_details');
+            $table->string('Currency')->default('MYR');
             $table->double('amount', 10, 2);
             $table->timestamps();
         });

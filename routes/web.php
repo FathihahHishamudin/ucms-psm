@@ -29,6 +29,14 @@ Route::get('/conf/{conf}/committeemenu', 'App\Http\Controllers\ConferenceControl
 Route::get('/conf/{conf}/committeemenu/updateconf', 'App\Http\Controllers\ConferenceController@edit');
 Route::put('/conf/{conf}/committeemenu/updateconf', 'App\Http\Controllers\ConferenceController@update');
 
+Route::get('/conf/{conf}/committeemenu/fees', 'App\Http\Controllers\FeesController@index');
+Route::post('/conf/{conf}/committeemenu/add-fees', 'App\Http\Controllers\FeesController@store');
+Route::get('/conf/{conf}/committeemenu/edit-fees/{fee}', 'App\Http\Controllers\FeesController@edit');
+Route::put('/conf/{conf}/committeemenu/edit-fees/{fee}', 'App\Http\Controllers\FeesController@update');
+Route::delete('/delete-fee/{fee}', 'App\Http\Controllers\FeesController@delete')->middleware('auth');
+
+Route::get('conf/{conf}/committeemenu/participants', 'App\Http\Controllers\NormalParticipantController@participantlist');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
