@@ -127,7 +127,7 @@
             <!-- Normal Participant role-->
             <div class="role">
                 <div class="dashboard-u">
-                    <div class="red-font text-xl">Normal Partcipant</div>
+                    <div class="red-font text-xl">Normal Participant</div>
                 </div>
                 <div class="mb-4 mt-2 ml-lg-5">
                     @foreach($np as $np)

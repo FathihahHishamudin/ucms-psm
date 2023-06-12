@@ -44,7 +44,7 @@
 
 <div class="topbar">
     <div class="topbarlogo">
-        <a href="{{ url('/') }}"><img src="image/UTMlogo2.png" alt="UTM Logo" width="350px" class="center"></a>
+        <a href="{{ url('/') }}"><img src="/image/UTMlogo2.png" alt="UTM Logo" width="350px" class="center"></a>
     </div>
     <div id="ucms">
         UTM CONFERENCE MANAGEMENT SYSTEM

@@ -196,20 +196,36 @@ class ConferenceController extends Controller
         
         // Check if the conference was found
         if ($conf) {
-            $chair = PC_Chair::where('Conference_id', $conf->Conference_id)->first();
-            
-            // Check if the chair was found and the chair's user ID matches the logged-in user's ID
-            if ($chair && $chair->User_id == Auth::user()->id) {
-                // Conference and chair found, and user ID matches, pass them to the view
-                return view('conference.update', [
-                    'conf' => $conf,
-                    'chair' => $chair
-                ]);
-            } else {
-                // Chair not found or user ID does not match, handle the error
+
+            if(Auth::check()) 
+            {
+                $ch = PC_Chair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+                $coch = PC_CoChair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+
+                if      ($ch != null)    {   $cfrole = "CHAIR";  }
+                elseif  ($coch != null)  {    $cfrole = "CO-CHAIR";  }   
+                else                     {    $cfrole = null;}
+
+                if($cfrole != null)
+                {
+                    return view('conference.update',['conf'=>$conf], ['cfrole'=>$cfrole]);
+                }
+                else
+                {
+                    return redirect()->back()->with('error', 'Unauthorized access.');
+                }
+
+            }
+            else
+            {
+                // Chair/coChair not found or user ID does not match, handle the error
                 return redirect()->back()->with('error', 'Unauthorized access.');
             }
-        } else {
+
+            return redirect()->back()->with('error', 'Unauthorized access.');
+
+        }
+        else {
             // Conference not found, handle the error
             return redirect()->back()->with('error', 'Conference not found.');
         }
