@@ -260,13 +260,18 @@ class ConferenceController extends Controller
         
         // Check if the conference was found
         if ($conf) {
-
+            $paper = null;
             if(Auth::check()) 
             {
                 $ch = PC_Chair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
                 $coch = PC_CoChair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
                 $rev = Reviewer::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
                 $aut = Author::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+                
+                if ($aut) {
+                    $paper = Paper::where('Author_id', $aut->Author_id)->where('Conference_id', $conf->Conference_id)->first();
+                }
+                else {$paper = "NOT FOUND";}
 
                 if      ($ch != null)    {    $cfrole = "CHAIR";    }
                 elseif  ($coch != null)  {    $cfrole = "CO-CHAIR"; }   
@@ -276,7 +281,7 @@ class ConferenceController extends Controller
 
                 if($cfrole != null)
                 {
-                    return view('conference.mypaper',['conf'=>$conf], ['cfrole'=>$cfrole]);
+                    return view('conference.mypaper', ['conf' => $conf, 'cfrole' => $cfrole, 'paper' => $paper]);
                 }
                 else
                 {

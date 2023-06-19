@@ -29,7 +29,7 @@
                                     @endphp
                                     @php $confabbr = App\Http\Controllers\DashboardController::getConferenceAbbr($chairs->Conference_id);
                                     @endphp
-                                    <div class="listrole"><a href="{{ url('/conf/'.$confabbr) }}">{{$confname}}</a></div>
+                                    <div class="listrole"><a href="{{ url('/conf/'.$confabbr.'/committeemenu') }}">{{$confname}}</a></div>
                                 </tr>
                             </tbody>
                         </table>
@@ -56,7 +56,9 @@
                                 <tr>
                                     @php $confname = App\Http\Controllers\DashboardController::getConferenceName($cochairs->Conference_id);
                                     @endphp
-                                    <div class="listrole">{{$confname}}</div>
+                                    @php $confabbr = App\Http\Controllers\DashboardController::getConferenceAbbr($cochairs->Conference_id);
+                                    @endphp
+                                    <div class="listrole"><a href="{{ url('/conf/'.$confabbr.'/committeemenu') }}">{{$confname}}</a></div>
                                 </tr>
                             </tbody>
                         </table>
@@ -110,7 +112,9 @@
                                 <tr>
                                     @php $confname = App\Http\Controllers\DashboardController::getConferenceName($author->Conference_id);
                                     @endphp
-                                    <div class="listrole">{{$confname}}</div>
+                                    @php $confabbr = App\Http\Controllers\DashboardController::getConferenceAbbr($author->Conference_id);
+                                    @endphp
+                                    <div class="listrole"><a href="{{ url('/conf/'.$confabbr.'/mypaper') }}">{{$confname}}</a></div>
                                 </tr>
                             </tbody>
                         </table>

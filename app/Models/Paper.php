@@ -23,9 +23,14 @@ class Paper extends Model
                             'CR_paper',
                             'Status_cr'];
 
-        public function conference(): BelongsTo
+    public function conference(): BelongsTo
     {
         return $this->belongsTo(Conference::class, 'Conference_id');
+    }
+
+    public function paperauthor(): BelongsTo
+    {
+        return $this->belongsTo(Author::class, 'Author_id');
     }
 
 }

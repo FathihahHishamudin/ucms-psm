@@ -217,6 +217,32 @@
         border-bottom: 1px solid lightgray;
     }
 
+/********************** END. ON COMMITTEE MENU. **********************/       
 
+/********************** START. MY PAPER MENU. **********************/
+
+.pdetails-box {
+    /* border: #171618 2px solid; */
+    margin: 50px 0px 0px 40px;
+
+}
+
+.pdet-header-line {
+    font-weight: bold;
+    font-size: 22px;
+    text-decoration: underline;
+}
+
+.upddet {
+    background-color: #dddddd;
+    border-radius: 10px;
+    padding: 20px 20px;
+}
+
+.paper-det-table{
+    /* border: #171618 2px solid; */
+    margin: 10px 0px 0px 30px;
+}
+/********************** START. MY PAPER MENU. **********************/
 
 </style>

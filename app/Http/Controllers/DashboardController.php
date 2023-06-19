@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $chairs = PC_Chair :: where ('User_id', $user_id)->with('conference')->get();
         $cochairs = PC_CoChair :: where ('User_id', $user_id)->with('conference')->get();
         $reviewer = Reviewer :: where ('User_id', $user_id)->with('conference')->get();
-        $author = Author :: where ('User_id', $user_id)->with('conference')->get();
+        $author = Author :: where ('User_id', $user_id)->with('authorconference')->get();
         $np = Normal_Participant :: where ('User_id', $user_id)->with('conference')->get();
 
 
