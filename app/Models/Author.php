@@ -15,9 +15,14 @@ class Author extends Model
                             'Conference_id', 
                             'Payment_id'];
     
-        public function conference(): BelongsTo
+    public function authorconference(): BelongsTo
     {
         return $this->belongsTo(Conference::class, 'Conference_id');
+    }
+
+    public function authoruser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'User_id');
     }
 
 }

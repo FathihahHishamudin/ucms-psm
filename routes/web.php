@@ -37,6 +37,8 @@ Route::delete('/delete-fee/{fee}', 'App\Http\Controllers\FeesController@delete')
 
 Route::get('conf/{conf}/committeemenu/participants', 'App\Http\Controllers\NormalParticipantController@participantlist')->middleware('auth');
 
+Route::get('/conf/{conf}/mypaper', 'App\Http\Controllers\ConferenceController@papermenu')->middleware('auth');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

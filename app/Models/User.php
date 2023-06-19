@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -65,5 +66,10 @@ class User extends Authenticatable
 
     public function pcchair(){
         return $this->hasMany(PC_Chair::class);
+    }
+
+    public function authors(): HasMany
+    {
+        return $this->hasMany(Author::class, 'User_id');
     }
 }

@@ -5,7 +5,7 @@
 @section('content')
 <body>
     <div class="dropdown">
-    <button class="dropbtn">
+        <button class="dropbtn">
             <div class="column side">
                 <i class="bi bi-caret-down-fill" style="font-size: 30px; float:right; padding-top:3%"></i>
             </div>
@@ -30,20 +30,6 @@
             @endif
         </div>
     </div>
-
-
-    <div class="container-tengah">
-        <div class="header-line">
-            <div class="header-font">CONTACT US</div>
-        </div>
-
-        <div class="mt40 desc">
-            <b>Conference Organizer:</b> {{$conf->Conference_org}} <br>
-            @if($conf->Conference_website)
-                <b>Organizer's website:</b> {{$conf->Conference_website}}
-            @endif
-        </div>       
-
-    </div>
+    
 </body>
 @endsection

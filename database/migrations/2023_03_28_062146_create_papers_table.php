@@ -16,17 +16,20 @@ return new class extends Migration
     {
         Schema::create('papers', function (Blueprint $table) {
             $table->id('Paper_id');
-            $table->string('Author_id')->constraint('authors')->onDelete('cascade');
-            $table->string('Conference_id')->constraint('conferences')->onDelete('cascade');
-            $table->string('Paper_title');
-            $table->string('Abstract');
-            $table->string('Review1_id')->constraint('reviews')->onUpdate('cascade');
-            $table->string('Status_abstract');
-            $table->string('Full_paper');
-            $table->string('Review2_id')->constraint('reviews')->onUpdate('cascade');
-            $table->string('Status_fullpaper');
-            $table->string('CR_paper');
-            $table->string('Status_cr');
+            $table->foreignId('Author_id')->references('Author_id')->on('authors');
+            $table->foreignId('Conference_id')->references('Conference_id')->on('conferences');
+            $table->string('paper_title')->nullable();
+            $table->string('abstract', 2000)->nullable();
+            $table->string('full_paper')->nullable();
+            $table->string('review1_fp_id')->nullable();
+            $table->string('review2_fp_id')->nullable();
+            $table->string('stat_fp')->nullable();
+            $table->string('Correction_fp')->nullable();
+            $table->string('review1_cfp_id')->nullable();
+            $table->string('review2_cfp_id')->nullable();
+            $table->string('stat_cfp')->nullable();
+            $table->string('cr_paper')->nullable();
+            $table->string('status_cr')->nullable();
             $table->timestamps();
         });
     }
