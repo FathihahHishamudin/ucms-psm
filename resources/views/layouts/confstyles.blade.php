@@ -221,28 +221,67 @@
 
 /********************** START. MY PAPER MENU. **********************/
 
-.pdetails-box {
-    /* border: #171618 2px solid; */
-    margin: 50px 0px 0px 40px;
+    .papersec-box {
+        /* border: #171618 2px solid; */
+        margin: 50px 0px 30px 40px;
 
-}
+    }
 
-.pdet-header-line {
-    font-weight: bold;
-    font-size: 22px;
-    text-decoration: underline;
-}
+    .pdet-header-line {
+        font-weight: bold;
+        font-size: 22px;
+        text-decoration: underline;
+    }
 
-.upddet {
-    background-color: #dddddd;
-    border-radius: 10px;
-    padding: 20px 20px;
-}
+    /* box to tell author to update their paper details - only visible if the title in null */
+    .upddet {
+        background-color: #dddddd;
+        border-radius: 10px;
+        padding: 20px 20px;
+    }
 
-.paper-det-table{
-    /* border: #171618 2px solid; */
-    margin: 10px 0px 0px 30px;
-}
-/********************** START. MY PAPER MENU. **********************/
+    .paper-det-table{
+        /* border: #171618 2px solid; */
+        margin: 10px 0px 0px 30px;
+    }
+
+    /*Small header inside papersec-box*/
+    .papersec-boxhead{
+        font-size: 20px;
+
+    }
+
+    /* table for paper submission*/
+    #psub {
+        border-collapse:collapse;
+        width: 95%;
+        margin-top: 20px;
+        margin-left: 5%;
+    }
+
+    #psub td, #psub th {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+
+    #psub th {
+        background-color: maroon;
+        color: white;
+    }
+
+    #psub td a{
+        color: maroon;
+        font-weight: bold;
+    }
+
+    #psub td a:hover {
+        color: blue;
+    }   
+
+
+
+
+    /********************** END. MY PAPER MENU. **********************/
 
 </style>

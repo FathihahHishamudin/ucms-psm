@@ -160,9 +160,13 @@
         }
 
         /* button color blue */
-
         button.btn-primary {
             background-color: blue !important;
+        }
+
+        /* custom hr line */
+        hr.new1 {
+            border-top: 2px solid maroon;
         }
 </style>
 

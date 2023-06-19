@@ -36,7 +36,7 @@
             <div class="header-font">MY PAPER</div>
         </div>
 
-        <div class="pdetails-box">
+        <div class="papersec-box">
             <div class="pdet-header-line">
                 My Paper Details   
                 <a href="" style="padding-left: 10px;" data-bs-toggle="modal" data-bs-target="#updatePaperDet" title="Update paper details">
@@ -52,24 +52,64 @@
 
             <table class="table-fixed paper-det-table">
                 <tr >
-                    <td class="w-1/4 px-4 py-2"><b>Paper ID</b></td>
-                    <td class="w-3/4 px-4 py-2"><b>: {{$paper->Paper_id}}</b></td>
+                    <td class="w-1/4 px-4 py-1"><b>Paper ID</b></td>
+                    <td class="w-3/4 px-4 py-1"><b>: {{$paper->Paper_id}}</b></td>
                 </tr>
                 <tr>
-                    <td class="w-1/4 px-4 py-2" class="det-left"><b>Paper Title</b></td>
-                    <td class="w-3/4 px-4 py-2"><b>: {{$paper->paper_title}}</b></td>
+                    <td class="w-1/4 px-4 py-1" class="det-left"><b>Paper Title</b></td>
+                    <td class="w-3/4 px-4 py-1"><b>: {{$paper->paper_title}}</b></td>
                 </tr>
                 <tr>
-                    <td class="w-1/4 px-4 py-2" class="det-left"><b>Paper Abstract Status</b></td>
+                    <td class="w-1/4 px-4 py-1" class="det-left"><b>Paper Abstract Status</b></td>
                     @if($paper->abstract == null)
-                        <td class="w-3/4 px-4 py-2"><b>: <b class="text-red-600">Abstract has not been uploaded</b></b></td>
+                        <td class="w-3/4 px-4 py-1"><b>: <b class="text-red-600">Abstract has not been uploaded</b></b></td>
                     @else
-                        <td class="w-3/4 px-4 py-2"><b>: <b class="text-green-600">Abstract has been uploaded</b></b></td>
+                        <td class="w-3/4 px-4 py-1"><b>: <b class="text-green-600">Abstract has been uploaded</b></b></td>
                     @endif
                 </tr>
             </table>
-
         </div>
+
+        <hr class="new1">
+
+        <div class="papersec-box">
+            <div class="papersec-boxhead">Submission Status</div>
+            <table id="psub">
+                <tr>
+                    <th>Item</th>
+                    <th>Submission Status (Paper Status)</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>Full Paper Submission</td>
+                    @if($paper->full_paper == null)
+                        <td><span class="text-red-600"><b>None </b></span>(<span class="text-red-600"><b>-</b></span>)</td>
+                    @else
+                        <td><span class="text-green-600"><b>Submitted</b></span></td>
+                    @endif
+                    <td><a href="#">Submit</a></td>
+                </tr>
+                <tr>
+                    <td>Correction Paper Submission</td>
+                    @if($paper->Correction_fp == null)
+                        <td><span class="text-red-600"><b>None </b></span>(<span class="text-red-600"><b>-</b></span>)</td>
+                    @else
+                        <td><span class="text-green-600"><b>Submitted</b></span></td>
+                    @endif
+                    <td><a href="#">Submit</a></td>
+                </tr>
+                <tr>
+                    <td>Camera-Ready Paper Submission</td>
+                    @if($paper->cr_paper == null)
+                        <td><span class="text-red-600"><b>None </b></span>(<span class="text-red-600"><b>-</b></span>)</td>
+                    @else
+                        <td><span class="text-green-600"><b>Submitted</b></span></td>
+                    @endif
+                    <td><a href="#">Submit</a></td>
+                </tr>
+            </table>
+        </div>
+
     </div>
 @include('author.modal.edit-paper-det')    
 </body>
