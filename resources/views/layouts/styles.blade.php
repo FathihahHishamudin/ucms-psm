@@ -158,5 +158,11 @@
             color: white;
             font-size: 20px;
         }
+
+        /* button color blue */
+
+        button.btn-primary {
+            background-color: blue !important;
+        }
 </style>
 
