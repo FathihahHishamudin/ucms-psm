@@ -131,15 +131,20 @@
                 <div class="papersec-box">
                     <div class="papersec-boxhead">Full Paper Submission</div>
 
-                    <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/uploadfp' }}" enctype="multipart/form-data">
-                        @csrf
-                        @if($paper->full_paper)
-                            <p>File uploaded: <a href="{{ asset('upload/papers/' . $paper->full_paper) }}" target="_blank">{{ $paper->full_paper }}</a></p>
-                        @else
-                            <input type="file" name="pdf_file">
+                    @if($paper->full_paper)
+                        <p>File uploaded: <a href="{{ asset('upload/papers/' . $paper->full_paper) }}" target="_blank">{{ $paper->full_paper }}</a></p>
+                        <form method="POST" action="{{ route('delete') }}">
+                            @csrf
+                            <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    @else
+                        <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/upload' }}" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="fullpaper">
                             <button type="submit">Upload</button>
-                        @endif
-                    </form>
+                        </form>
+                    @endif
 
                 </div>
             </div>
@@ -152,15 +157,20 @@
                 <div class="papersec-box">
                     <div class="papersec-boxhead">Correction Paper Submission</div>
 
-                    <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/uploadfp' }}" enctype="multipart/form-data">
-                        @csrf
-                        @if($paper->Correction_fp)
-                            <p>File uploaded: <a href="{{ asset('upload/papers/' . $paper->Correction_fp) }}" target="_blank">{{ $paper->Correction_fp }}</a></p>
-                        @else
+                    @if($paper->Correction_fp)
+                        <p>File uploaded: <a href="{{ asset('upload/papers/' . $paper->Correction_fp) }}" target="_blank">{{ $paper->Correction_fp }}</a></p>
+                        <form method="POST" action="{{ route('delete') }}">
+                            @csrf
+                            <input type="hidden" name="paper_id_cfp" value="{{ $paper->Paper_id }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    @else
+                        <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/upload' }}" enctype="multipart/form-data">
+                            @csrf
                             <input type="file" name="correctionpaper">
                             <button type="submit">Upload</button>
-                        @endif
-                    </form>
+                        </form>
+                    @endif
 
                 </div>
             </div>
@@ -173,16 +183,20 @@
                 <div class="papersec-box">
                     <div class="papersec-boxhead">Camera Ready Paper Submission</div>
 
-                    <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/uploadfp' }}" enctype="multipart/form-data">
-                        @csrf
-                        @if($paper->cr_paper)
-                            <p>File uploaded: <a href="{{ asset('upload/papers/' . $paper->cr_paper) }}" target="_blank">{{ $paper->cr_paper }}</a></p>
-                        @else
+                    @if($paper->cr_paper)
+                        <p>File uploaded: <a href="{{ asset('upload/papers/' . $paper->cr_paper) }}" target="_blank">{{ $paper->cr_paper }}</a></p>
+                        <form method="POST" action="{{ route('delete') }}">
+                            @csrf
+                            <input type="hidden" name="paper_id_cr" value="{{ $paper->Paper_id }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    @else
+                        <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/upload' }}" enctype="multipart/form-data">
+                            @csrf
                             <input type="file" name="crpaper">
                             <button type="submit">Upload</button>
-                        @endif
-                    </form>
-
+                        </form>
+                    @endif
                 </div>
             </div>
 

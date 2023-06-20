@@ -61,17 +61,17 @@ class PaperController extends Controller
         $aut = Author::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
         $paper = Paper::where('Author_id', $aut->Author_id)->where('Conference_id', $conf->Conference_id)->first();
     
-        if ($request->hasFile('pdf_file')){
+        if ($request->hasFile('fullpaper')){
             // Validate the uploaded file
             $request->validate([
-                'pdf_file' => 'required|mimes:pdf|max:2048', // Adjust the maximum file size if needed
+                'fullpaper' => 'required|mimes:pdf|max:2048', // Adjust the maximum file size if needed
             ]);
         
             // Store the uploaded file
-            $file = $request->file('pdf_file');
+            $file = $request->file('fullpaper');
             $paper->full_paper=time()."_".$aut->Author_id."_".$file->getClientOriginalName();   //save file to the database
             $file->move(\public_path("/upload/papers"), $paper->full_paper);
-            $request['pdf_file']=$paper->full_paper;
+            $request['fullpaper']=$paper->full_paper;
             $paper->save();
         }
         elseif ($request->hasFile('correctionpaper')) {
@@ -103,4 +103,76 @@ class PaperController extends Controller
     
         return redirect()->back()->with('success', 'Paper uploaded successfully.');
     }
+
+    public function delete(Request $request)
+    {
+        if ($request->hasAny('paper_id_fp')) {
+            $paperId = $request->input('paper_id_fp');
+            $paper = Paper::find($paperId);
+
+            if ($paper){
+                if ($paper->full_paper) {
+                    $file = public_path('upload/papers/'.$paper->full_paper);
+                    if (file_exists($file)) {
+                        unlink($file);
+                    }
+
+                    $paper->full_paper = null;
+                    $paper->save();
+
+                    return redirect()->back()->with('success', 'File fp deleted successfully!');
+                }
+
+                return "File not found or already deleted.";
+            }
+
+            return "Paper not found";
+        }
+        elseif ($request->hasAny('paper_id_cfp'))
+        {
+            $paperId = $request->input('paper_id_cfp');
+            $paper = Paper::find($paperId);
+
+            if ($paper){
+                if ($paper->Correction_fp) {
+                    $file = public_path('upload/papers/'.$paper->Correction_fp);
+                    if (file_exists($file)) {
+                        unlink($file);
+                    }
+
+                    $paper->Correction_fp = null;
+                    $paper->save();
+
+                    return redirect()->back()->with('success', 'File cfp deleted successfully!');
+                }
+
+                return "File not found or already deleted.";
+            }
+
+            return "Paper not found";
+        }
+        elseif ($request->hasAny('paper_id_cr')) {
+            $paperId = $request->input('paper_id_cr');
+            $paper = Paper::find($paperId);
+
+            if ($paper){
+                if ($paper->cr_paper) {
+                    $file = public_path('upload/papers/'.$paper->cr_paper);
+                    if (file_exists($file)) {
+                        unlink($file);
+                    }
+
+                    $paper->cr_paper = null;
+                    $paper->save();
+
+                    return redirect()->back()->with('success', 'File crp deleted successfully!');
+                }
+
+                return "File not found or already deleted.";
+            }
+
+            return "Paper not found";
+        }
+    }
+
 }
