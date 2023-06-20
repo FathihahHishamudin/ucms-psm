@@ -12,6 +12,7 @@ use App\Models\Author;
 use App\Models\Fees;
 use App\Models\Paper;
 use App\Models\AreaofInterest;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
@@ -122,6 +123,8 @@ class ConferenceController extends Controller
                 $rev = Reviewer::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
                 $np = Normal_Participant::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
                 $aut = Author::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+                $confchair = PC_Chair::where('Conference_id', $conf->Conference_id)->first();
+                $confchairu = User::where('id', $confchair->User_id)->first();
 
                 if      ($ch != null)    {   $cfrole = "CHAIR";  }
                 elseif  ($coch != null)  {    $cfrole = "CO-CHAIR";  }   
@@ -130,7 +133,7 @@ class ConferenceController extends Controller
                 elseif  ($aut != null)   {    $cfrole = "AUTHOR";}
                 else                     {    $cfrole = null;}
 
-                return view('conference.contactus',['conf'=>$conf], ['cfrole'=>$cfrole]);
+                return view('conference.contactus',['conf'=>$conf, 'cfrole'=>$cfrole, 'confchairu'=>$confchairu]);
 
             }
             else
@@ -245,6 +248,7 @@ class ConferenceController extends Controller
                 "Conference_venue" => $request->venue,
                 "Conference_desc" => $request->description,
                 "Conference_org" => $request->org,
+                "Conference_website" =>$request->web,
                 "Conference_announcement" => $request->announcement,
             ]);
 

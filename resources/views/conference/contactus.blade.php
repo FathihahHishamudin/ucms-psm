@@ -38,10 +38,22 @@
         </div>
 
         <div class="mt40 desc">
-            <b>Conference Organizer:</b> {{$conf->Conference_org}} <br>
-            @if($conf->Conference_website)
-                <b>Organizer's website:</b> {{$conf->Conference_website}}
-            @endif
+            <table class="table-fixed" style="font-size: 18px;">
+                <tr>
+                    <td class="w-2/5 px-4 py-1"><b>Conference Organizer</b></td>
+                    <td class="w-3/5 px-4 py-1"> {{$conf->Conference_org}} </td>
+                </tr>
+                @if($conf->Conference_website)
+                    <tr>
+                        <td class="w-2/5 px-4 py-1"><b>Conference's website</b></td>
+                        <td class="w-3/5 px-4 py-1"><a href="{{$conf->Conference_website}}" style="text-decoration: underline; color:blue;"  target="_blank">{{$conf->Conference_website}}</a></td>
+                    </tr>
+                @endif
+                <tr>
+                    <td class="w-2/5 px-4 py-1"><b>Conference Chair's email</b></td>
+                    <td class="w-3/5 px-4 py-1"><a href="mailto:{{$confchairu->email}}?subject=Conference%20Enquiry" style="text-decoration: underline; color:blue;">{{$confchairu->email}}</a> </td>
+                </tr>
+            </table>
         </div>       
 
     </div>

@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="form1">
-                    <x-label class="form2-label" for="orgweb" value="{{ __('Organizer’s Website (if any)') }}" />
+                    <x-label class="form2-label" for="orgweb" value="{{ __('Conference’s Website (if any)') }}" />
                     <x-input class="form2-input" id="orgweb" type="text" name="orgweb" />
                 </div>
 
