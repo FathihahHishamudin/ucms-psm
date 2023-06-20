@@ -64,8 +64,13 @@ class PaperController extends Controller
         if ($request->hasFile('fullpaper')){
             // Validate the uploaded file
             $request->validate([
-                'fullpaper' => 'required|mimes:pdf|max:2048', // Adjust the maximum file size if needed
+                'fullpaper' => 'required|mimes:pdf|max:20480', // Adjust the maximum file size if needed
             ]);
+
+            // Check if file is present
+            if (!$request->hasFile('fullpaper')) {
+                return redirect()->back()->with('error', 'Please select a file to upload.');
+            }
         
             // Store the uploaded file
             $file = $request->file('fullpaper');
@@ -77,7 +82,7 @@ class PaperController extends Controller
         elseif ($request->hasFile('correctionpaper')) {
             // Validate the uploaded file
             $request->validate([
-                'correctionpaper' => 'required|mimes:pdf|max:2048', // Adjust the maximum file size if needed
+                'correctionpaper' => 'required|mimes:pdf|max:20480', // Adjust the maximum file size if needed
             ]);
         
             // Store the uploaded file
@@ -87,10 +92,10 @@ class PaperController extends Controller
             $request['correctionpaper']=$paper->Correction_fp;
             $paper->save();
         }
-        else {
+        elseif ($request->hasFile('crpaper')) {
             // Validate the uploaded file
             $request->validate([
-                'crpaper' => 'required|mimes:pdf|max:2048', // Adjust the maximum file size if needed
+                'crpaper' => 'required|mimes:pdf|max:20480', // Adjust the maximum file size if needed
             ]);
         
             // Store the uploaded file

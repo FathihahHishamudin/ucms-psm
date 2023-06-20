@@ -223,7 +223,7 @@
 
     .papersec-box {
         /* border: #171618 2px solid; */
-        margin: 50px 0px 30px 40px;
+        margin: 50px 0px 30px 20px;
 
     }
 
@@ -242,21 +242,20 @@
 
     .paper-det-table{
         /* border: #171618 2px solid; */
-        margin: 10px 0px 0px 30px;
+        margin: 10px 0px 0px 20px;
     }
 
     /*Small header inside papersec-box*/
     .papersec-boxhead{
         font-size: 20px;
-
+        margin-bottom: 20px;
     }
 
     /* table for paper submission*/
     #psub {
         border-collapse:collapse;
-        width: 95%;
-        margin-top: 20px;
-        margin-left: 5%;
+        width: 90%;
+        margin:auto;
     }
 
     #psub td, #psub th {
@@ -266,7 +265,7 @@
     }
 
     #psub th {
-        background-color: maroon;
+        background-color: #6A1515;
         color: white;
     }
 
@@ -282,8 +281,59 @@
     #psub td button:disabled {
         color: grey;
     }
-    
 
+    /*  part Action:Submit punya css */
+    .paperSubmitBox{
+        border: 2px solid black;
+        border-radius: 16px;
+        width: 70%;
+        margin: auto;
+        min-height: 210px;
+        text-align: center;
+    }
+
+    .paperSubmitHeader{
+        color: #872D4A;
+        font-size: 22px;
+        line-height: 37px;
+        font-weight: bold;
+        margin-top: 23px;
+    }
+    
+    .paperSubmitBox p{
+        font-size: 16px;
+        margin-top: 40px;
+        margin-bottom: 10px;
+    }
+
+    .paperSubmitBox a{
+        display: inline-block;
+        margin: 40px 0px 40px 0px;
+        text-decoration: underline;
+        color: blue;
+    }
+
+    .paperSubmitBox input{
+        border: 2px solid #dfced3;
+        padding: 10px;
+        margin-bottom: 40px;
+    }
+
+    .paperSubmitBox button{
+        padding: 5px 15px;
+        color: #f1f1f1;
+        background-color: black;
+        margin-bottom: 25px;
+    }
+
+    .paperSubmitBox button:hover{
+        box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+    }
+
+    .paperSubmitBox button:disabled {
+        background-color: #bfbfbf;
+        box-shadow: none;
+    }
 
 
 
