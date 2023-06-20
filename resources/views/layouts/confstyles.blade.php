@@ -270,14 +270,19 @@
         color: white;
     }
 
-    #psub td a{
+    #psub td button{
         color: maroon;
         font-weight: bold;
     }
 
-    #psub td a:hover {
+    #psub td button:hover {
         color: blue;
-    }   
+    }
+    
+    #psub td button:disabled {
+        color: grey;
+    }
+    
 
 
 

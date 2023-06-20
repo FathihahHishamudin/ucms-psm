@@ -39,6 +39,7 @@ Route::get('conf/{conf}/committeemenu/participants', 'App\Http\Controllers\Norma
 
 Route::get('/conf/{conf}/mypaper', 'App\Http\Controllers\ConferenceController@papermenu')->middleware('auth');
 Route::put('/conf/{conf}/mypaper/upd-paper-details/', 'App\Http\Controllers\PaperController@updatePaperDet')->middleware('auth');
+Route::post('/conf/{conf}/mypaper/uploadfp', 'App\Http\Controllers\PaperController@upload')->middleware('auth');
 
 
 Route::middleware([

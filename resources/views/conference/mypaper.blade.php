@@ -84,33 +84,152 @@
                     <td>Full Paper Submission</td>
                     @if($paper->full_paper == null)
                         <td><span class="text-red-600"><b>None </b></span>(<span class="text-red-600"><b>-</b></span>)</td>
+                        <td><button id="tButton1">Submit</button></td>
                     @else
                         <td><span class="text-green-600"><b>Submitted</b></span></td>
+                        <td><button id="tButton1">View</button></td>
                     @endif
-                    <td><a href="#">Submit</a></td>
                 </tr>
                 <tr>
                     <td>Correction Paper Submission</td>
                     @if($paper->Correction_fp == null)
                         <td><span class="text-red-600"><b>None </b></span>(<span class="text-red-600"><b>-</b></span>)</td>
+                        @if($paper->full_paper == null)
+                            <td><button id="tButton2" disabled>Submit</button></td>
+                        @endif
+                        @if($paper->full_paper !== null) <!-- tak guna elseif sebab it doesn't work -->
+                            <td><button id="tButton2">Submit</button></td>
+                        @endif
                     @else
                         <td><span class="text-green-600"><b>Submitted</b></span></td>
+                        <td><button id="tButton2">View</button></td>
                     @endif
-                    <td><a href="#">Submit</a></td>
+                    
                 </tr>
                 <tr>
                     <td>Camera-Ready Paper Submission</td>
                     @if($paper->cr_paper == null)
                         <td><span class="text-red-600"><b>None </b></span>(<span class="text-red-600"><b>-</b></span>)</td>
+                        @if($paper->Correction_fp == null)
+                            <td><button id="tButton3" disabled>Submit</button></td>
+                        @endif
+                        @if($paper->Correction_fp !== null) <!-- tak guna elseif sebab it doesn't work -->
+                            <td><button id="tButton3">Submit</button></td>
+                        @endif
                     @else
                         <td><span class="text-green-600"><b>Submitted</b></span></td>
+                        <td><button id="tButton3">View</button></td>
                     @endif
-                    <td><a href="#">Submit</a></td>
+                    
                 </tr>
             </table>
         </div>
 
+        <div id="tSection1" style="display: none;">
+            <div>
+                <hr class="new1">
+                <div class="papersec-box">
+                    <div class="papersec-boxhead">Full Paper Submission</div>
+
+                    <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/uploadfp' }}" enctype="multipart/form-data">
+                        @csrf
+                        @if($paper->full_paper)
+                            <p>File uploaded: <a href="{{ asset('upload/papers/' . $paper->full_paper) }}" target="_blank">{{ $paper->full_paper }}</a></p>
+                        @else
+                            <input type="file" name="pdf_file">
+                            <button type="submit">Upload</button>
+                        @endif
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div id="tSection2" style="display: none;">
+            <div>
+                <hr class="new1">
+                <div class="papersec-box">
+                    <div class="papersec-boxhead">Correction Paper Submission</div>
+
+                    <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/uploadfp' }}" enctype="multipart/form-data">
+                        @csrf
+                        @if($paper->Correction_fp)
+                            <p>File uploaded: <a href="{{ asset('upload/papers/' . $paper->Correction_fp) }}" target="_blank">{{ $paper->Correction_fp }}</a></p>
+                        @else
+                            <input type="file" name="correctionpaper">
+                            <button type="submit">Upload</button>
+                        @endif
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div id="tSection3" style="display: none;">
+            <div>
+                <hr class="new1">
+                <div class="papersec-box">
+                    <div class="papersec-boxhead">Camera Ready Paper Submission</div>
+
+                    <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/uploadfp' }}" enctype="multipart/form-data">
+                        @csrf
+                        @if($paper->cr_paper)
+                            <p>File uploaded: <a href="{{ asset('upload/papers/' . $paper->cr_paper) }}" target="_blank">{{ $paper->cr_paper }}</a></p>
+                        @else
+                            <input type="file" name="crpaper">
+                            <button type="submit">Upload</button>
+                        @endif
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
     </div>
-@include('author.modal.edit-paper-det')    
+@include('author.modal.edit-paper-det')   
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var button1 = document.getElementById('tButton1');
+            var button2 = document.getElementById('tButton2');
+            var button3 = document.getElementById('tButton3');
+            var section1 = document.getElementById('tSection1');
+            var section2 = document.getElementById('tSection2');
+            var section3 = document.getElementById('tSection3');
+
+            button1.addEventListener('click', function () {
+                toggleSection(section1);
+            });
+
+            button2.addEventListener('click', function () {
+                toggleSection(section2);
+            });
+
+            button3.addEventListener('click', function () {
+                toggleSection(section3);
+            });
+
+            function toggleSection(targetSection) {
+                var sections = [section1, section2, section3];
+
+                for (var i = 0; i < sections.length; i++) {
+                    if (sections[i] === targetSection) {
+                        if (sections[i].style.display === 'block') {
+                            sections[i].style.display = 'none';
+                        } else {
+                            sections[i].style.display = 'block';
+                        }
+                    } else {
+                        sections[i].style.display = 'none';
+                    }
+                }
+            }
+        });
+    </script>
+
+
 </body>
 @endsection
