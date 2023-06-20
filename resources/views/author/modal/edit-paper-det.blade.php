@@ -37,7 +37,7 @@
                         <small id="abstract-word-count" class="form-text text-muted"></small>
                     </div>
                     <!-- Submit button -->
-                    <button type="submit" class="w-100 mb-2 btn rounded-4 btn-primary">Submit</button>
+                    <button type="submit" class="w-100 mb-2 btn rounded-4 btn-primary disabled">Submit</button>
                 </div>
             </div>
         </div>
