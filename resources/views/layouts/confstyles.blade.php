@@ -252,33 +252,33 @@
     }
 
     /* table for paper submission*/
-    #psub {
+    .psub {
         border-collapse:collapse;
         width: 90%;
         margin:auto;
     }
 
-    #psub td, #psub th {
+    .psub td, .psub th {
         border: 1px solid black;
         padding: 8px;
         text-align: center;
     }
 
-    #psub th {
+    .psub th {
         background-color: #6A1515;
         color: white;
     }
 
-    #psub td button{
+    .psub td button{
         color: maroon;
         font-weight: bold;
     }
 
-    #psub td button:hover {
+    .psub td button:hover {
         color: blue;
     }
     
-    #psub td button:disabled {
+    .psub td button:disabled {
         color: grey;
     }
 

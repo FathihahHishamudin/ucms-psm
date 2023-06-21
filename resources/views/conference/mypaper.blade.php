@@ -74,7 +74,7 @@
 
         <div class="papersec-box">
             <div class="papersec-boxhead">Submission Status</div>
-            <table id="psub">
+            <table class="psub">
                 <tr>
                     <th>Item</th>
                     <th>Submission Status (Paper Status)</th>
