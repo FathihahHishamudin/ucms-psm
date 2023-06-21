@@ -42,6 +42,8 @@ Route::put('/conf/{conf}/mypaper/upd-paper-details/', 'App\Http\Controllers\Pape
 Route::post('/conf/{conf}/mypaper/upload', 'App\Http\Controllers\PaperController@upload')->middleware('auth');
 Route::post('/delete', 'App\Http\Controllers\PaperController@delete')->name('delete');
 
+Route::get('/conf/{conf}/reviewermenu', 'App\Http\Controllers\ConferenceController@reviewermenu')->middleware('auth');
+
 
 
 Route::middleware([

@@ -161,11 +161,9 @@ class ConferenceController extends Controller
             {
                 $ch = PC_Chair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
                 $coch = PC_CoChair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
-                $rev = Reviewer::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
 
                 if      ($ch != null)    {   $cfrole = "CHAIR";  }
-                elseif  ($coch != null)  {    $cfrole = "CO-CHAIR";  }   
-                elseif  ($rev != null)   {    $cfrole = "REVIEWER";}
+                elseif  ($coch != null)  {    $cfrole = "CO-CHAIR";  }
                 else                     {    $cfrole = null;}
 
                 if($cfrole != null)
@@ -267,9 +265,6 @@ class ConferenceController extends Controller
             $paper = null;
             if(Auth::check()) 
             {
-                $ch = PC_Chair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
-                $coch = PC_CoChair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
-                $rev = Reviewer::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
                 $aut = Author::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
                 
                 if ($aut) {
@@ -277,15 +272,62 @@ class ConferenceController extends Controller
                 }
                 else {$paper = "NOT FOUND";}
 
-                if      ($ch != null)    {    $cfrole = "CHAIR";    }
-                elseif  ($coch != null)  {    $cfrole = "CO-CHAIR"; }   
-                elseif  ($rev != null)   {    $cfrole = "REVIEWER"; }
-                elseif  ($aut != null)   {    $cfrole = "AUTHOR";   }
+                if  ($aut != null)       {    $cfrole = "AUTHOR";   }
                 else                     {    $cfrole = null;       }
 
                 if($cfrole != null)
                 {
                     return view('conference.mypaper', ['conf' => $conf, 'cfrole' => $cfrole, 'paper' => $paper]);
+                }
+                else
+                {
+                    return redirect()->back()->with('error', 'Unauthorized access.');
+                }
+
+            }
+            else
+            {
+                // Chair/coChair/Reviewer not found or user ID does not match, handle the error
+                return redirect()->back()->with('error', 'Unauthorized access.');
+            }
+
+            return redirect()->back()->with('error', 'Unauthorized access.');
+
+        } 
+        else {
+            // Conference not found, handle the error
+            return redirect()->back()->with('error', 'Conference not found.');
+        }
+
+
+    }
+
+    public function reviewermenu ($abbr)
+    {
+        $conf = Conference::where('Conference_abbr', $abbr)->first();
+        
+        // Check if the conference was found
+        if ($conf) {
+            $paper = null;
+            if(Auth::check()) 
+            {
+                $rev = Reviewer::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+                
+                if ($rev) {
+                    $paper = Paper::where('r1_id', $rev->Reviewer_id)
+                        ->where('Conference_id', $conf->Conference_id)
+                        ->orWhere('r2_id', $rev->Reviewer_id)
+                        ->where('Conference_id', $conf->Conference_id)
+                        ->get();
+                }
+                else {$paper = "NOT FOUND";}
+
+                if  ($rev != null)       {    $cfrole = "REVIEWER";   }
+                else                     {    $cfrole = null;       }
+
+                if($cfrole != null)
+                {
+                    return view('conference.reviewermenu', ['conf' => $conf, 'cfrole' => $cfrole, 'paper' => $paper]);
                 }
                 else
                 {
