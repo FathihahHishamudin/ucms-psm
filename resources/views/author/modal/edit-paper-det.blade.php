@@ -37,7 +37,7 @@
                         <small id="abstract-word-count" class="form-text text-muted"></small>
                     </div>
                     <!-- Submit button -->
-                    <button type="submit" class="w-100 mb-2 btn rounded-4 btn-primary disabled">Submit</button>
+                    <button type="submit" id="upd-paper-det-subBtn" class="w-100 mb-2 btn rounded-4 btn-primary" disabled>Submit</button>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
 <script>
     const abstractTextarea = document.getElementById('abstract');
     const wordCountElement = document.getElementById('abstract-word-count');
-    const submitButton = document.querySelector('button[type="submit"]');
+    const submitButton = document.getElementById('upd-paper-det-subBtn');
 
     abstractTextarea.addEventListener('input', function() {
         const abstract = abstractTextarea.value;
