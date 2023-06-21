@@ -18,6 +18,8 @@ return new class extends Migration
             $table->id('Paper_id');
             $table->foreignId('Author_id')->references('Author_id')->on('authors');
             $table->foreignId('Conference_id')->references('Conference_id')->on('conferences');
+            $table->string('r1_id')->nullable()->constraint('reviewers')->onDelete("set null");
+            $table->string('r2_id')->nullable()->constraint('reviewers')->onDelete("set null");
             $table->string('paper_title')->nullable();
             $table->string('abstract', 2000)->nullable();
             $table->string('full_paper')->nullable();
