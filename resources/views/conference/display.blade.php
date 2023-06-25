@@ -25,6 +25,9 @@
             @if ($cfrole=="CHAIR" or $cfrole=="CO-CHAIR" or $cfrole=="REVIEWER")
                 <a href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu' }}">COMMITTEE MENU</a>
             @endif
+            @if ($cfrole=="REVIEWER")
+                <a href="{{ url('/conf/'.$conf->Conference_abbr).'/reviewermenu' }}">REVIEWER MENU</a>
+            @endif
             @if ($cfrole=="AUTHOR")
                 <a href="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper' }}">MY PAPER</a>
             @endif

@@ -22,7 +22,7 @@
                 <a href="#">REGISTRATION</a>
             @endif
             <a href="{{ url('/conf/'.$conf->Conference_abbr).'/contactus' }}">CONTACT US</a>
-            @if ($cfrole=="CHAIR" or $cfrole=="CO-CHAIR" or $cfrole=="REVIEWER")
+            @if ($cfrole=="CHAIR" or $cfrole=="CO-CHAIR")
                 <a href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu' }}">COMMITTEE MENU</a>
             @endif
             @if ($cfrole=="REVIEWER")
