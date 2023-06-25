@@ -55,12 +55,21 @@
                             <td class="w-1/10 px-4 py-1">{{ $loop->iteration }}</td>
                             <td class="w-1/2 px-4 py-1">{{$paper->paper_title}}</td>
                             @if($paper->full_paper)
-                                <td class="w-1/5 px-4 py-1">To Review</td>
+                                <td class="w-1/5 px-4 py-1">
+                                    @php $revfp =  App\Http\Controllers\ReviewsController::getFPReviewID($paper);
+                                    @endphp
+                                    <a href="{{ url('/conf/'.$conf->Conference_abbr.'/reviewermenu/'.$revfp->Review_id)}}">{{$revfp->status}} ( {{$revfp->p_status}} )</a>
+                                    
+                                </td>
                             @else
                                 <td class="w-1/5 px-4 py-1">N/A</td>
                             @endif
-                            @if($paper->Correction_fp)
-                                <td class="w-1/5 px-4 py-1">To Review</td>
+                            @if(($paper->Correction_fp) && ($paper->stat_fp == "WA"))
+                                <td class="w-1/5 px-4 py-1">
+                                    @php $revcfp =  App\Http\Controllers\ReviewsController::getCFPReviewID($paper);
+                                    @endphp
+                                    {{$revcfp->status}} ( {{$revcfp->p_status}} )
+                                </td>
                             @else
                                 <td class="w-1/5 px-4 py-1">N/A</td>
                             @endif

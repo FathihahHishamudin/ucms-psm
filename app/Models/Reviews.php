@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reviews extends Model
 {
@@ -13,13 +14,26 @@ class Reviews extends Model
     protected $fillable = [
         'Paper_id',
         'Reviewer_id',
-        'Review_Originality',
-        'Review_Relevance',
-        'Review_Suitable',
-        'Review_Findings',
-        'Review_Language',
-        'Review_Marks',
-        'Review_result',
-        'Review_comment'
+        'originality',
+        'relevance',
+        'suitable',
+        'findings',
+        'reference',
+        'language',
+        'total',
+        'status',
+        'p_status',
+        'comment'
     ];
+
+    public function paper(): BelongsTo
+    {
+        return $this->belongsTo(Paper::class, 'Paper_id');
+    }
+
+    public function reviewer(): BelongsTo
+    {
+        return $this->belongsTo(Reviewer::class, 'Reviewer_id');
+    }
+
 }

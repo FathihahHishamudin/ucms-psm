@@ -43,6 +43,8 @@ Route::post('/conf/{conf}/mypaper/upload', 'App\Http\Controllers\PaperController
 Route::post('/delete', 'App\Http\Controllers\PaperController@delete')->name('delete');
 
 Route::get('/conf/{conf}/reviewermenu', 'App\Http\Controllers\ConferenceController@reviewermenu')->middleware('auth');
+Route::get('/conf/{conf}/reviewermenu/{review}', 'App\Http\Controllers\ReviewsController@review')->middleware('auth');
+
 
 
 

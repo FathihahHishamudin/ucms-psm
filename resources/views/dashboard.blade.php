@@ -85,7 +85,9 @@
                                 <tr>
                                     @php $confname = App\Http\Controllers\DashboardController::getConferenceName($reviewer->Conference_id);
                                     @endphp
-                                    <div class="listrole">{{$confname}}</div>
+                                    @php $confabbr = App\Http\Controllers\DashboardController::getConferenceAbbr($reviewer->Conference_id);
+                                    @endphp
+                                    <div class="listrole"><a href="{{ url('/conf/'.$confabbr.'/reviewermenu') }}">{{$confname}}</a></div>
                                 </tr>
                             </tbody>
                         </table>

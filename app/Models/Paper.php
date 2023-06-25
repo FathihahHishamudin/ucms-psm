@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Paper extends Model
 {
@@ -12,16 +13,21 @@ class Paper extends Model
     public $table = 'papers';
     protected $primaryKey = 'Paper_id';
     protected $fillable = ['Author_id', 
-                           'Conference_id', 
-                           'Paper_title',
-                           'Abstract',
-                           'Review1_id',
-                           'Status_abstract',
-                           'Full_paper',
-                            'Review2_id',
-                            'Status_fullpaper',
-                            'CR_paper',
-                            'Status_cr'];
+                           'Conference_id',
+                           'r1_id',
+                           'r2_id', 
+                           'paper_title',
+                           'abstract',
+                           'full_paper',
+                           'review1_fp_id',
+                           'review2_fp_id',
+                           'stat_fp',
+                           'Correction_fp',
+                           'review1_cfp_id',
+                           'review2_cfp_id',
+                            'stat_cfp',
+                            'cr_paper',
+                            'status_cr'];
 
     public function conference(): BelongsTo
     {
@@ -31,6 +37,11 @@ class Paper extends Model
     public function paperauthor(): BelongsTo
     {
         return $this->belongsTo(Author::class, 'Author_id');
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Reviews::class, 'Paper_id');
     }
 
 }
