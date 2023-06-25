@@ -58,13 +58,13 @@
                                 <td class="w-1/5 px-4 py-1">
                                     @php $revfp =  App\Http\Controllers\ReviewsController::getFPReviewID($paper);
                                     @endphp
-                                    <a href="{{ url('/conf/'.$conf->Conference_abbr.'/reviewermenu/'.$revfp->Review_id)}}">{{$revfp->status}} ( {{$revfp->p_status}} )</a>
+                                    <a href="{{ url('/conf/'.$conf->Conference_abbr.'/reviewermenu/'.$revfp->Review_id)}}">{{$revfp->status}} <br>( {{$revfp->p_status}} )</a>
                                     
                                 </td>
                             @else
                                 <td class="w-1/5 px-4 py-1">N/A</td>
                             @endif
-                            @if(($paper->Correction_fp) && ($paper->stat_fp == "WA"))
+                            @if(($paper->Correction_fp) && ($paper->stat_fp == "Weak Acceptance"))
                                 <td class="w-1/5 px-4 py-1">
                                     @php $revcfp =  App\Http\Controllers\ReviewsController::getCFPReviewID($paper);
                                     @endphp

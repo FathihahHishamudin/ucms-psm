@@ -20,7 +20,7 @@ class ReviewsController extends Controller
 
         if ($conf) {
             if ($reviews) {
-                $paper = Paper::where('Paper_id', $reviews->Paper_id);
+                $paper = Paper::where('Paper_id', $reviews->Paper_id)->first();
                 if ($paper) {
                     if (Auth::check()) {
                         $reviewer = Reviewer::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
@@ -41,6 +41,33 @@ class ReviewsController extends Controller
             }
         }
 
+    }
+
+    public function update(Request $request, $rId)
+    {
+        // Find the review by ID
+        $review = Reviews::findOrFail($rId);
+
+        if ($review) {
+            $review->originality = $request->input('ori');
+            $review->relevance = $request->input('rel');
+            $review->suitable = $request->input('sui');
+            $review->findings = $request->input('fin');
+            $review->reference = $request->input('ref');
+            $review->language = $request->input('lan');
+            $total = $request->input('ori') + $request->input('ref') + $request->input('rel') + $request->input('sui') + $request->input('fin') + $request->input('lan');
+            $review->total = $total;
+            $review->status = "Reviewed";
+            $review->p_status = $request->input('pstat-hidden');
+            $review->comment = $request->input('comment');
+            $review->save();
+
+            // Redirect or return a response as desired
+            return redirect()->back()->with('success', 'Review updated successfully');
+        }
+
+        // Redirect or return a response as desired
+        return redirect()->back()->with('error', 'Review not updated');
     }
 
     public static function getFPReviewID($p) {

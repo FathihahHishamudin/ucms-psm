@@ -339,4 +339,113 @@
 
     /********************** END. MY PAPER MENU. **********************/
 
+    /********************** START. REVIEWS ***************************/
+
+    .buttonlike {
+        background-color: #D9D9D9;
+        padding: 0px 5px;
+        border-radius: 9px;
+        box-shadow: 3px 3px 3px darkgray;
+    }
+
+    .buttonlike:hover {
+        background-color: #3A0000;
+        color: white;
+    }
+
+    .rfkotakA {
+        width: 90%;
+        margin: auto;
+        margin-top: 30px;
+    }
+
+    .rfkotakB {
+        border-radius: 16px;
+        border: 2px solid #3A0000;
+        background: #FAFAFA;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        padding: 20px;
+    }
+
+    .rftable {
+        border-collapse:collapse;
+        width: 70%;
+        margin: auto;
+        margin-top: 15px;
+    }
+
+    .rftable td, .rftable th {
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    .rftable th {
+        background-color: #6A1515;
+        color: white;
+    }
+
+    select {
+        width: 100%;
+        padding: 0;
+        text-align: center;
+        border: none;
+    }
+
+    .radioreview {
+        width: 70%;
+        margin: auto;
+        margin-top: 15px;
+    }
+
+    .radioreview label{
+        color: #3A0000;
+        font-size: 19px;
+
+    }
+
+    .reviewcommentarea {
+        width: 90%;
+        margin: auto;
+        margin-top: 20px;
+        background-color: #e6dada;
+        border: 1px solid #000;
+        padding: 7px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .rcatitle {
+    align-self: flex-start;
+    }
+
+    .reviewsubmitbtn {
+        width: 121px;
+        height: 40px;
+        border-radius: 9px;
+        background: #D9D9D9;
+        box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        color: #872D4A;
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 13px;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .justify-center {
+        justify-content: center;
+    }
+
+    button.reviewsubmitbtn {
+        background-color: #D9D9D9;
+    }
+
+    button.reviewsubmitbtn:hover {
+        background: #3A0000;
+        color: white;
+    }
+
 </style>

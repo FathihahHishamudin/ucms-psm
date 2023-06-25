@@ -168,5 +168,11 @@
         hr.new1 {
             border-top: 2px solid maroon;
         }
+        
+        /* custom hr line */
+        hr.new2 {
+            border-top: 2px solid #3A0000;
+            opacity: 1;
+        }
 </style>
 
