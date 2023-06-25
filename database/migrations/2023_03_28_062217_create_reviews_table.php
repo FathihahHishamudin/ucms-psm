@@ -15,16 +15,18 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id('Review_id');
-            $table->string('Paper_id')->constraint('papers')->onDelete("cascade");
-            $table->string('Reviewer_id')->constraint('reviewers');
-            $table->integer('Review_Originality');
-            $table->integer('Review_Relevance');
-            $table->integer('Review_Suitable');
-            $table->integer('Review_Findings');
-            $table->integer('Review_Language');
-            $table->integer('Review_Marks');
-            $table->integer('Review_result');
-            $table->string('Review_comment');
+            $table->foreignId('Paper_id')->references('Paper_id')->on('papers');
+            $table->foreignId('Reviewer_id')->references('Reviewer_id')->on('reviewers');
+            $table->integer('originality')->nullable();
+            $table->integer('relevance')->nullable();
+            $table->integer('suitable')->nullable();
+            $table->integer('findings')->nullable();
+            $table->integer('reference')->nullable();
+            $table->integer('language')->nullable();
+            $table->integer('total')->nullable();
+            $table->enum('status', ['To Review', 'Reviewed'])->default('To Review');
+            $table->string('p_status')->default("-");
+            $table->string('comment', 2000)->nullable();
             $table->timestamps();
         });
     }
