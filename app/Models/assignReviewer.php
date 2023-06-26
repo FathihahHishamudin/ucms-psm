@@ -9,8 +9,9 @@ class assignReviewer extends Model
 {
     use HasFactory;
     public $table = 'assign_reviewer';
-    protected $fillable = ['Paper_id', 
-                            'Reviewer_id',
+    protected $fillable = ['Conference_id',
+                            'Paper_id', 
+                            'User_id',
                             'status',
                             'due'];
 }

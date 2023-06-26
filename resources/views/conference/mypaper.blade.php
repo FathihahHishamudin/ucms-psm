@@ -151,7 +151,7 @@
                             <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/upload' }}" enctype="multipart/form-data">
                                 @csrf
                                 <input type="file" id="fullpaper" name="fullpaper"><br>
-                                <button type="submit" id="uploadBtn" disabled>UPLOAD</button>
+                                <button type="submit" id="uploadBtn" disabled autofocus>UPLOAD</button>
                             </form>
 
                             <script>
@@ -271,6 +271,7 @@
                             sections[i].style.display = 'none';
                         } else {
                             sections[i].style.display = 'block';
+                            sections[i].scrollIntoView({ behavior: 'smooth' }); // Scroll to the section
                         }
                     } else {
                         sections[i].style.display = 'none';

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\assignReviewer;
 use App\Models\Conference;
 use App\Models\Paper;
 use App\Models\Reviewer;
 use App\Models\Reviews;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReviewsController extends Controller
 {
@@ -84,5 +87,77 @@ class ReviewsController extends Controller
                         ->first();
 
         return $revcfp;
+    }
+
+    public function showAcceptPage ($abbr, $uId)
+    {
+        $conf = Conference::where('Conference_abbr', $abbr)->first();
+        
+        if ($uId == Auth::user()->id) {
+            $ada = null;
+
+            $assg = assignReviewer::where('Conference_id', $conf->Conference_id)
+                                    ->where ('User_id', Auth::user()->id)
+                                    ->where ('status', "Pending")
+                                    ->get();
+            if ($assg->isNotEmpty()) {
+                $ada = "123";
+            }
+
+            return view('reviewer.acceptance', compact('assg', 'ada'));
+        }
+        return response(['error' => true, 'error-msg' => 'Not found'], 404);
+    }
+
+    public static function getpaper($pId) {
+        $paper = Paper::where('Paper_id', $pId->Paper_id)->first();
+        return $paper;
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $statuses = $request->input('status');
+        $assignIds = $request->input('assgIds');
+    
+        foreach ($assignIds as $index => $assignId) {
+            DB::table('assign_reviewer')
+                ->where('id', '=', $assignId)
+                ->update(['status' => $statuses[$index]]);
+
+            $assign = DB::table('assign_reviewer')->where('id', $assignId)->first();
+            $paperId = $assign->Paper_id;
+
+            $paper = Paper::find($paperId);
+
+            if ($assign->status == "Accept") {
+                
+                $rev = null;
+                $rev = Reviewer::where('User_id', Auth::user()->id)->where('Conference_id', $paper->Conference_id)->first(); //already a reviewer for this conference
+                
+                if ($rev) {
+                    if ($paper->r1_id == null) {
+                        $paper->update(["r1_id" => $rev->Reviewer_id,]);
+                    }
+                    elseif ($paper->r2_id == null) {
+                        $paper->update(["r2_id" => $rev->Reviewer_id,]);
+                    }
+                }
+                else {
+                    $rev = new Reviewer();
+                    $rev->User_id = Auth::user()->id;
+                    $rev->conference_id = $paper->Conference_id;
+
+                    $rev->save();
+
+                    if ($paper->r1_id == null) {
+                        $paper->update(["r1_id" => $rev->Reviewer_id,]);
+                    }
+                    elseif ($paper->r2_id == null) {
+                        $paper->update(["r2_id" => $rev->Reviewer_id,]);
+                    }
+                }
+            }
+        }
+        return redirect()->back()->with('success', 'Status updated successfully.');
     }
 }

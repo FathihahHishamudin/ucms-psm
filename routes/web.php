@@ -46,6 +46,10 @@ Route::get('/conf/{conf}/reviewermenu', 'App\Http\Controllers\ConferenceControll
 Route::get('/conf/{conf}/reviewermenu/{review}', 'App\Http\Controllers\ReviewsController@review')->middleware('auth');
 Route::put('/reviews/{rId}', 'App\Http\Controllers\ReviewsController@update')->name('review.update');
 
+Route::get('/reviewacceptance/{conf}/{uId}', 'App\Http\Controllers\ReviewsController@showAcceptPage')->middleware('auth');
+Route::post('/reviewer/update-status', 'App\Http\Controllers\ReviewsController@updateStatus')->name('reviewer.updateStatus')->middleware('auth');
+
+
 
 
 
