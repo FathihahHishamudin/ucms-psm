@@ -254,7 +254,7 @@
     /* table for paper submission*/
     .psub {
         border-collapse:collapse;
-        width: 90%;
+        width: 95%;
         margin:auto;
     }
 

@@ -136,10 +136,20 @@ class ReviewsController extends Controller
                 
                 if ($rev) {
                     if ($paper->r1_id == null) {
-                        $paper->update(["r1_id" => $rev->Reviewer_id,]);
+                        $revipa = new Reviews();
+                        $revipa->Paper_id = $paper->Paper_id;
+                        $revipa->Reviewer_id = $rev->Reviewer_id;
+                        $revipa->save();
+
+                        $paper->update(["r1_id" => $rev->Reviewer_id, "review1_fp_id" =>$revipa->Review_id,]);
                     }
                     elseif ($paper->r2_id == null) {
-                        $paper->update(["r2_id" => $rev->Reviewer_id,]);
+                        $revipa = new Reviews();
+                        $revipa->Paper_id = $paper->Paper_id;
+                        $revipa->Reviewer_id = $rev->Reviewer_id;
+                        $revipa->save();
+
+                        $paper->update(["r2_id" => $rev->Reviewer_id, "review2_fp_id" =>$revipa->Review_id,]);
                     }
                 }
                 else {
@@ -150,10 +160,20 @@ class ReviewsController extends Controller
                     $rev->save();
 
                     if ($paper->r1_id == null) {
-                        $paper->update(["r1_id" => $rev->Reviewer_id,]);
+                        $revipa = new Reviews();
+                        $revipa->Paper_id = $paper->Paper_id;
+                        $revipa->Reviewer_id = $rev->Reviewer_id;
+                        $revipa->save();
+
+                        $paper->update(["r1_id" => $rev->Reviewer_id, "review1_fp_id" =>$revipa->Review_id,]);
                     }
                     elseif ($paper->r2_id == null) {
-                        $paper->update(["r2_id" => $rev->Reviewer_id,]);
+                        $revipa = new Reviews();
+                        $revipa->Paper_id = $paper->Paper_id;
+                        $revipa->Reviewer_id = $rev->Reviewer_id;
+                        $revipa->save();
+
+                        $paper->update(["r2_id" => $rev->Reviewer_id, "review2_fp_id" =>$revipa->Review_id,]);
                     }
                 }
             }
