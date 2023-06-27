@@ -26,12 +26,14 @@ return new class extends Migration
             $table->string('paper_title')->nullable();
             $table->string('abstract', 2000)->nullable();
             $table->string('full_paper')->nullable();
+            $table->string('full_paper_br')->nullable();
             $table->unsignedBigInteger('review1_fp_id')->nullable();
             $table->foreign('review1_fp_id')->references('Review_id')->on('reviews');
             $table->unsignedBigInteger('review2_fp_id')->nullable();
             $table->foreign('review2_fp_id')->references('Review_id')->on('reviews');
             $table->string('stat_fp')->nullable();
             $table->string('Correction_fp')->nullable();
+            $table->string('Correction_fp_br')->nullable();
             $table->unsignedBigInteger('review1_cfp_id')->nullable();
             $table->foreign('review1_cfp_id')->references('Review_id')->on('reviews');
             $table->unsignedBigInteger('review2_cfp_id')->nullable();
