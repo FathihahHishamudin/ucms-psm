@@ -28,6 +28,9 @@ Route::get('/conf/{conf}/register', 'App\Http\Controllers\ConferenceController@r
 Route::post('/conf/{conf}/register/addParticipant', 'App\Http\Controllers\ConferenceController@regParticipant')->middleware('auth');
 
 Route::get('/conf/{conf}/contactus', 'App\Http\Controllers\ConferenceController@contact')->middleware('auth');
+Route::get('/conf/{conf}/payment', 'App\Http\Controllers\PaymentController@index')->middleware('auth');
+Route::post('/conf/{conf}/payment/upload', 'App\Http\Controllers\PaymentController@upload')->middleware('auth');
+Route::post('/delete-pop', 'App\Http\Controllers\PaymentController@delete')->name('delete-pop');
 
 Route::get('/conf/{conf}/committeemenu', 'App\Http\Controllers\ConferenceController@comenu')->middleware('auth');
 Route::get('/conf/{conf}/committeemenu/updateconf', 'App\Http\Controllers\ConferenceController@edit')->middleware('auth');

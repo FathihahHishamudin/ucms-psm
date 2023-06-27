@@ -74,7 +74,7 @@ class PaperController extends Controller
         
             // Store the uploaded file
             $file = $request->file('fullpaper');
-            $paper->full_paper=$conf->Conference_abbr."_".$aut->Author_id."_FP";   //save file to the database
+            $paper->full_paper=$conf->Conference_abbr."_".$aut->Author_id."_FP.".$file->getClientOriginalExtension();   //save file to the database
             $file->move(\public_path("/upload/papers"), $paper->full_paper);
             $request['fullpaper']=$paper->full_paper;
             $paper->save();
@@ -87,7 +87,7 @@ class PaperController extends Controller
         
             // Store the uploaded file
             $file = $request->file('correctionpaper');
-            $paper->Correction_fp=time()."_".$aut->Author_id."_".$file->getClientOriginalName();   //save file to the database
+            $paper->Correction_fp=$conf->Conference_abbr."_".$aut->Author_id."_CFP.".$file->getClientOriginalExtension();   //save file to the database
             $file->move(\public_path("/upload/papers"), $paper->Correction_fp);
             $request['correctionpaper']=$paper->Correction_fp;
             $paper->save();

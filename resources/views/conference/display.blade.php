@@ -31,6 +31,9 @@
             @if ($cfrole=="AUTHOR")
                 <a href="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper' }}">MY PAPER</a>
             @endif
+            @if ($cfrole == "AUTHOR" || $cfrole == "LISTENER")
+                <a href="{{ url('/conf/'.$conf->Conference_abbr).'/payment' }}">PAYMENT</a>
+            @endif
         </div>
     </div>
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('Conference_id')->constraint('conferences')->onDelete("cascade");
             $table->string('Fee_id')->constraint('fees')->onDelete("cascade");
             $table->string('payment_status');
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

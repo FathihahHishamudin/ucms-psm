@@ -530,4 +530,48 @@
         background: white;
     }
 
+    /********************* END. REGISTER MENU. ********************/
+    /********************* START. PAYMENT MENU. ********************/
+
+    .payment-container {
+        width: 80%;
+        margin: auto;
+        margin-top: 40px;
+        border-radius: 50px;
+        border: 2px solid #3A0000;
+        padding: 40px;
+    }
+
+    .payment-header {
+        font-size: x-large;
+        color:#3a0000;
+        font-weight: bold;
+    }
+
+    .kol-left {
+        width: 35%;
+        text-align: right;
+        font-weight: bold;
+    }
+
+    .paym-det-box a {
+        text-decoration: underline;
+        color: blue;
+    }
+
+    .paym-det-box button {
+        padding: 5px 15px;
+        color: #f1f1f1;
+        background-color: black;
+    }
+
+    .paym-det-box button:hover {
+        box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3);
+    }
+
+    .paym-det-box button:disabled {
+        background-color: #bfbfbf;
+        box-shadow: none;
+    }
+
 </style>
