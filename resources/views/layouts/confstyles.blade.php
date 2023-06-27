@@ -448,4 +448,86 @@
         color: white;
     }
 
+    /********************** END. REVIEWS MENU. **********************/
+    /********************* START. REGISTER MENU. ********************/
+
+    tr.bor-bot th {
+        border-bottom: 2px solid #C7A0AE;
+    }
+
+    .registerconferencebox{
+        width: 70%;
+        margin: auto;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        padding: 50px 30px 30px 30px;
+        border-radius: 16px;
+        border: 2px solid #3A0000;
+        color: #3A0000;
+    }
+
+    /* Custom labels: the container */
+    .checkcontainer {
+        display: block;
+        position: relative;
+        padding-left: 28px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        -webkit-user-select: none; /* Chrome, Opera, Safari */
+        -moz-user-select: none; /* Firefox 2+ */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none; /* Standard syntax */
+    }
+
+    /* Hide the browser's default checkbox */
+    .checkcontainer input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+    
+    /* Create a custom radio button */
+    .radiobtn{
+        position: absolute;
+        top: 6;
+        left: 0;
+        height: 18px;
+        width: 18px;
+        background-color: #eee;
+        border-radius: 50%;
+        border: 1px solid #3a0000;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .checkcontainer:hover input ~ .radiobtn{
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .checkcontainer input:checked ~ .radiobtn{
+        background-color: #3a0000;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .radiobtn:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .checkcontainer input:checked ~ .radiobtn:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .checkcontainer .radiobtn:after {
+        top: 4px;
+        left: 5px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: white;
+    }
+
 </style>

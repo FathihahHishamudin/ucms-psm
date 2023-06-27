@@ -12,7 +12,9 @@ class Fees extends Model
     public $table = 'fees';
     protected $primaryKey = 'Fee_id';
     protected $fillable = ['Conference_id',
+                            'Type',
                             'Fee_details',
+                            'Currency',
                             'amount'];
 
     public function conference(): BelongsTo

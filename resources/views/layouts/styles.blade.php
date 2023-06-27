@@ -166,7 +166,8 @@
 
         /* custom hr line */
         hr.new1 {
-            border-top: 2px solid maroon;
+            border-top: 2px solid #C7A0AE;
+            opacity: 1;
         }
         
         /* custom hr line */

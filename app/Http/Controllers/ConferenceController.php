@@ -12,6 +12,7 @@ use App\Models\Author;
 use App\Models\Fees;
 use App\Models\Paper;
 use App\Models\AreaofInterest;
+use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -352,4 +353,87 @@ class ConferenceController extends Controller
 
     }
     
+    public function register ($abbr)
+    {
+        $conf = Conference::where('Conference_abbr', $abbr)->first();
+        $cfrole = null;
+        
+        // Check if the conference was found
+        if ($conf) {
+            if(Auth::check()) 
+            {
+                $ch = PC_Chair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+                $coch = PC_CoChair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+                $rev = Reviewer::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+                $np = Normal_Participant::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+                $aut = Author::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+
+                if      ($ch != null)    {   $cfrole = "CHAIR";  }
+                elseif  ($coch != null)  {    $cfrole = "CO-CHAIR";  }   
+                elseif  ($rev != null)   {    $cfrole = "REVIEWER";}
+                elseif  ($np != null)    {    $cfrole = "LISTENER";}
+                elseif  ($aut != null)   {    $cfrole = "AUTHOR";}
+                else                     {    $cfrole = null;}
+
+                $listfee = Fees::where('Conference_id', $conf->Conference_id)->where('Type', "Author")->orderBy('Fee_details', 'asc')->get();
+                $listfeee = Fees::where('Conference_id', $conf->Conference_id)->where('Type', "Listener/Delegate")->orderBy('Fee_details', 'asc')->get();
+                $conffee = $listfee->concat($listfeee);
+
+                if($cfrole == null){
+                    return view('conference.register',['conf'=>$conf, 'cfrole'=>$cfrole, 'conffee'=>$conffee]);
+                }
+                else {
+                    return redirect()->back()->with('error', 'Unauthorized access.');
+                }
+            }
+            else
+            {
+                return redirect()->back()->with('error', 'Unauthorized access.');
+            }
+        } else {
+            // Conference not found, handle the error -- error not work but it does redirect back
+            return redirect()->back()->with('error', 'Conference not found.');
+        }
+    }
+
+    public function regParticipant (Request $request, $abbr)
+    {
+        $conf = Conference::where('Conference_abbr', $abbr)->first();
+        $feeType = Fees::where('Fee_id', $request->input('parType'))->first();
+        
+
+        if ($conf && $feeType) {            
+            $pay = new Payment();
+            $pay->Conference_id = $conf->Conference_id;
+            $pay->Fee_id = $feeType->Fee_id;
+            $pay->payment_status = "Unpaid";
+            $pay->save();
+
+            if ($feeType->Type == "Author") {
+                $newpar = new Author();
+                $newpar->User_id = Auth::user()->id;
+                $newpar->Conference_id = $conf->Conference_id;
+                $newpar->Payment_id = $pay->Payment_id;
+                $newpar->save();
+
+                $authorpaper = new Paper();
+                $authorpaper->Author_id = $newpar->Author_id;
+                $authorpaper->Conference_id = $conf->Conference_id;
+                $authorpaper->save();
+
+                return redirect('/conf/' . $conf->Conference_abbr);
+            }
+            else if ($feeType->Type == "Listener/Delegate"){
+                $newpar = new Normal_Participant();
+                $newpar->User_id = Auth::user()->id;
+                $newpar->Conference_id = $conf->Conference_id;
+                $newpar->Payment_id = $pay->Payment_id;
+                $newpar->save();
+
+                return redirect('/conf/' . $conf->Conference_abbr);
+            }
+            return redirect()->back()->with('error', 'Conference not found.');
+        }
+        return redirect()->back()->with('error', 'Conference not found.');
+    }
 }

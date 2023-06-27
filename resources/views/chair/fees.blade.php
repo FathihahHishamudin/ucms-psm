@@ -18,7 +18,6 @@
         </button>
         <div class="dropdown-content">
             <a href="{{ url('/conf/'.$conf->Conference_abbr)}}">HOME</a>
-            <a href="#">REGISTRATION</a>
             <a href="{{ url('/conf/'.$conf->Conference_abbr).'/contactus' }}">CONTACT US</a>
             @if ($cfrole=="CHAIR" or $cfrole=="CO-CHAIR" or $cfrole=="REVIEWER")
                 <a href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu' }}">COMMITTEE MENU</a>

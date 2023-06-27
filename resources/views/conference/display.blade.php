@@ -19,7 +19,7 @@
         <div class="dropdown-content">
             <a href="{{ url('/conf/'.$conf->Conference_abbr)}}">HOME</a>
             @if ($cfrole == null)
-                <a href="#">REGISTRATION</a>
+                <a href="{{ url('/conf/'.$conf->Conference_abbr).'/register' }}">REGISTRATION</a>
             @endif
                 <a href="{{ url('/conf/'.$conf->Conference_abbr).'/contactus' }}">CONTACT US</a>
             @if ($cfrole=="CHAIR" or $cfrole=="CO-CHAIR")

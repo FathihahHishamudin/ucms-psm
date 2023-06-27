@@ -23,9 +23,13 @@ Route::get('/create-conf', function () {return view('chair.createconfform');});
 Route::post('/create-conf', 'App\Http\Controllers\ConferenceController@create')->middleware('auth');
 
 Route::get('/conf/{conf}', 'App\Http\Controllers\ConferenceController@show')->middleware('auth');
-Route::get('/conf/{conf}/contactus', 'App\Http\Controllers\ConferenceController@contact')->middleware('auth');
-Route::get('/conf/{conf}/committeemenu', 'App\Http\Controllers\ConferenceController@comenu')->middleware('auth');
 
+Route::get('/conf/{conf}/register', 'App\Http\Controllers\ConferenceController@register')->middleware('auth');
+Route::post('/conf/{conf}/register/addParticipant', 'App\Http\Controllers\ConferenceController@regParticipant')->middleware('auth');
+
+Route::get('/conf/{conf}/contactus', 'App\Http\Controllers\ConferenceController@contact')->middleware('auth');
+
+Route::get('/conf/{conf}/committeemenu', 'App\Http\Controllers\ConferenceController@comenu')->middleware('auth');
 Route::get('/conf/{conf}/committeemenu/updateconf', 'App\Http\Controllers\ConferenceController@edit')->middleware('auth');
 Route::put('/conf/{conf}/committeemenu/updateconf', 'App\Http\Controllers\ConferenceController@update')->middleware('auth');
 
