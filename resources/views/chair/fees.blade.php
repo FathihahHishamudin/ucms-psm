@@ -55,19 +55,7 @@
                                     <i class="bi bi-pin-angle"> {{ $fees->Currency }} {{ $fees->amount }}</i> 
                                 </p>
                                 <!-- Buttons -->
-                                <div class="text-end">
-                                    <!-- Edit button -->
-                                    <a href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/edit-fees/'.($fees->Fees_id) }}" class="btn btn-sm btn-secondary" title="Edit">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                    <!-- Delete button -->
-                                    <form action="{{ url('/delete-fee/'.$fees->Fee_id) }}" method="post">
-                                        {{csrf_field()}}
-                                        {{ method_field('DELETE') }}
-                                        <button class="btn btn-sm btn-danger mt-3" type="submit" onclick="return confirm('Confirm delete');" title="Delete">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>  
+                                <div class="text-end">  
                                     <!-- Date created -->
                                     <small class="text-muted">
                                         created {{ $fees->created_at->diffForHumans() }}

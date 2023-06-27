@@ -31,9 +31,6 @@ Route::put('/conf/{conf}/committeemenu/updateconf', 'App\Http\Controllers\Confer
 
 Route::get('/conf/{conf}/committeemenu/fees', 'App\Http\Controllers\FeesController@index')->middleware('auth');
 Route::post('/conf/{conf}/committeemenu/add-fees', 'App\Http\Controllers\FeesController@store')->middleware('auth');
-Route::get('/conf/{conf}/committeemenu/edit-fees/{fee}', 'App\Http\Controllers\FeesController@edit')->middleware('auth');
-Route::put('/conf/{conf}/committeemenu/edit-fees/{fee}', 'App\Http\Controllers\FeesController@update')->middleware('auth');
-Route::delete('/delete-fee/{fee}', 'App\Http\Controllers\FeesController@delete')->middleware('auth');
 
 Route::get('conf/{conf}/committeemenu/participants', 'App\Http\Controllers\NormalParticipantController@participantlist')->middleware('auth');
 

@@ -27,8 +27,8 @@
                     <!-- Fee Type -->
                     <div class="col-md-4 ">
                         <label for="floatingInput" class="form-label">Participant Type</label>
-                        <select name="type" id="type" class="form-select mb-3">
-                            <option selected>Select Participant Type</option>
+                        <select name="type" id="type" class="form-select mb-3" required>
+                            <option value="" disabled selected>Select an option</option>
                             <option value="Author">Author</option>
                             <option value="Listener/Delegate">Listener/Delegate</option>
                         </select>
@@ -40,13 +40,26 @@
                     </div>
                     <!-- Amount -->
                     <div class="form-floating mb-3">
-                        <input type="double" name="amount" class="form-control" placeholder="Amount" required>
+                        <input type="number" name="amount" class="form-control" step="0.01" placeholder="Amount" required>
                             <label for="floatingInput">Amount</label>
                     </div>
                     <!-- Submit button -->
-                    <button type="submit" class="w-100 mb-2 btn rounded-4 btn-primary">Submit</button>
+                    <button id="addfeesubmitBtn" type="submit" class="w-100 mb-2 btn rounded-4 btn-primary">Submit</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('#addfeesubmitBtn').on('click', function (e) {
+        var checkbox = $('#default-checkbox');
+            e.preventDefault(); // Prevent the default form submission
+
+            // Show confirmation dialog
+            if (confirm("\nAre you sure you want to add this fee?\n\nPlease note that you won't be able to modify or delete the added fee after your submission.")) {
+                // Proceed with the form submission
+                $('form').submit();
+            }
+    });
+</script>
