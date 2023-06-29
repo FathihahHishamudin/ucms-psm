@@ -574,4 +574,103 @@
         box-shadow: none;
     }
 
+    /********************* END. PAYMENT MENU. ********************/
+    /********************* START. ADD COCHAIR MENU. ********************/
+
+    .assgcochairbox {
+        border: 2px solid #3a0000;
+        border-radius: 18px;
+        width: 80%;
+        margin: auto;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+
+    .cochair-list-box {
+        width: 90%;
+        margin: auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .ca-head {
+        color: #3a0000;
+        font-size: 20px;
+        text-decoration-line: underline;
+    }
+
+    .coch-table {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .coch-table-left {
+        text-align: left;
+        width: 35%;
+    }
+
+    .acceptco {
+        width: 121px;
+        height: 40px;
+        border-radius: 9px;
+        background: green;
+        box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 13px;
+    }
+
+    button.acceptco {
+        background-color: green;
+    }
+
+    button.acceptco:hover {
+        background: darkgreen;
+        color: white;
+    }
+
+    .declineco {
+        width: 121px;
+        height: 40px;
+        border-radius: 9px;
+        background: red;
+        box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 13px;
+    }
+
+    button.declineco {
+        background-color: red;
+    }
+
+    button.declineco:hover {
+        background: darkred;
+        color: white;
+    }
+
+    .cochair-assign {
+        border-radius: 16px;
+        border: 2px solid #3A0000;
+        width: 70%;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        align-items: center;
+        text-align: center;
+        padding: 22px 0px;
+    }
+
+    .cochair-assign-header {
+        color: #872D4A;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .cochair-assign-email {
+        padding: 25px 0px;
+    }
+
 </style>

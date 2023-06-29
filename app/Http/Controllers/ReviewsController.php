@@ -37,12 +37,16 @@ class ReviewsController extends Controller
                         }
                         else
                         {
-                            return redirect()->back()->with('error', 'Unauthorized access.');
+                            return redirect()->back()->with('error', 'You are UNAUTHORIZE to access the page.');
                         }
                     }
+                    return redirect()->back()->with('error', 'You are UNAUTHORIZE to access the page.');
                 }
+                return redirect()->back()->with('error', 'Paper not found');
             }
+            return redirect()->back()->with('error', 'Review not found');
         }
+        return redirect()->back()->with('error', 'Conference not found');
 
     }
 
@@ -101,7 +105,7 @@ class ReviewsController extends Controller
                                     ->where ('status', "Pending")
                                     ->get();
             if ($assg->isNotEmpty()) {
-                $ada = "123";
+                $ada = "ada";
             }
 
             return view('reviewer.acceptance', compact('assg', 'ada'));

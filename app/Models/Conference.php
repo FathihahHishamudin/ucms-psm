@@ -65,5 +65,10 @@ class Conference extends Model
         return $this->hasMany(Paper::class, 'Conference_id');
     }
 
+    public function assgcochair(): HasMany
+    {
+        return $this->hasMany(assignCochair::class, 'Conference_id');
+    }
+
 
 }

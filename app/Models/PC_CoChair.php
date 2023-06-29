@@ -22,5 +22,9 @@ class PC_CoChair extends Model
         return $this->belongsTo(Conference::class, 'Conference_id');
     }
 
+    public function user():BelongsTo
+    {
+        return $this->belongsTo(User::class, 'User_id');
+    }
     
 }

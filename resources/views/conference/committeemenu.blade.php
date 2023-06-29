@@ -52,7 +52,7 @@
                 </div>
                 @if($cfrole == "CHAIR")
                     <div class="pcmenu list">
-                        <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/updateconf' }}"><i class="bi bi-person-check-fill"></i><b>&nbsp; &nbsp; Conference Co-Chairs</b></a>
+                        <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/cochair' }}"><i class="bi bi-person-check-fill"></i><b>&nbsp; &nbsp; Conference Co-Chairs</b></a>
                     </div>
                 @endif
             @endif

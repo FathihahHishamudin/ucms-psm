@@ -17,7 +17,12 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
+/* Route::get('/trymail', 'App\Http\Controllers\MailController@try'); */
+Route::post('/conf/{conf}/addcochair', 'App\Http\Controllers\MailController@coChairInvitation')->middleware('auth');
+Route::get('/tryview', 'App\Http\Controllers\MailController@tryview');
+
 Route::get('/', 'App\Http\Controllers\ConferenceController@list');
+
 
 Route::get('/create-conf', function () {return view('chair.createconfform');});
 Route::post('/create-conf', 'App\Http\Controllers\ConferenceController@create')->middleware('auth');
@@ -40,6 +45,7 @@ Route::get('/conf/{conf}/committeemenu/fees', 'App\Http\Controllers\FeesControll
 Route::post('/conf/{conf}/committeemenu/add-fees', 'App\Http\Controllers\FeesController@store')->middleware('auth');
 
 Route::get('conf/{conf}/committeemenu/participants', 'App\Http\Controllers\NormalParticipantController@participantlist')->middleware('auth');
+Route::get('/conf/{conf}/committeemenu/cochair', 'App\Http\Controllers\PCCoChairController@index')->middleware('auth');
 
 Route::get('/conf/{conf}/mypaper', 'App\Http\Controllers\ConferenceController@papermenu')->middleware('auth');
 Route::put('/conf/{conf}/mypaper/upd-paper-details/', 'App\Http\Controllers\PaperController@updatePaperDet')->middleware('auth');
@@ -53,6 +59,11 @@ Route::put('/reviews/{rId}', 'App\Http\Controllers\ReviewsController@update')->n
 Route::get('/reviewacceptance/{conf}/{uId}', 'App\Http\Controllers\ReviewsController@showAcceptPage')->middleware('auth');
 Route::post('/reviewer/update-status', 'App\Http\Controllers\ReviewsController@updateStatus')->name('reviewer.updateStatus')->middleware('auth');
 
+Route::get('/cochairrole/{conf}/{uId}', 'App\Http\Controllers\PCCoChairController@showPage')->middleware('auth');
+Route::post('/cochairrole/accept', 'App\Http\Controllers\PCCoChairController@accept')->name('cochair.accept')->middleware('auth');
+Route::post('/cochairrole/decline', 'App\Http\Controllers\PCCoChairController@decline')->name('cochair.decline')->middleware('auth');
+Route::delete('/{conf}/delete-cochair/{coId}', 'App\Http\Controllers\PCCoChairController@deletecochair')->middleware('auth');
+Route::delete('/{conf}/delete-pending-cochair/{pcoId}', 'App\Http\Controllers\PCCoChairController@deletepending')->middleware('auth');
 
 
 

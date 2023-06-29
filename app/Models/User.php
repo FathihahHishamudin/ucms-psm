@@ -72,4 +72,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Author::class, 'User_id');
     }
+
+    public function cochair(): HasMany
+    {
+        return $this->hasMany(PC_CoChair::class, 'User_id');
+    }
+
+    public function assgcochair(): HasMany
+    {
+        return $this->hasMany(assignCochair::class, 'User_id');
+    }
 }
