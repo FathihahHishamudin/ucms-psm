@@ -31,4 +31,8 @@ class Author extends Model
         return $this->hasOne(Paper::class, 'Author_id');
     }
 
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class, 'Payment_id');
+    }
 }

@@ -134,4 +134,22 @@ class PaymentController extends Controller
         }
         return redirect()->back()->with('error', 'error occured');
     }
+
+    public function update(Request $request, $abbr)
+    {
+        $conf = Conference::where('Conference_abbr', $abbr)->first();
+        $payId = $request->input('pid');
+        $pay = Payment::where('Payment_id', $payId)->first();
+
+        if ($pay) {
+            $pay->update([
+                "payment_status" => $request->status,
+            ]);
+            return redirect()->back()->with('success', 'Payment status updated successfully.');
+        }
+        else {
+            return redirect()->back()->with('error', 'Payment not found.');
+        }
+
+    }
 }

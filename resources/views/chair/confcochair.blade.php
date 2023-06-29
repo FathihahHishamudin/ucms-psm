@@ -59,7 +59,7 @@
                     @endforeach
                 </table>
             @else
-                <p>There is no coChair/s for this conference. Please invite a user of the system to be a coChair</p>
+                <p style="font-size: 16px; padding-left:10px;">There is no pending CoChair/s for this conference. Please invite a user of the system to be a CoChair</p>
             @endif
                 
         </div>
@@ -87,7 +87,7 @@
                     @endforeach
                 </table>
             @else
-                <p style="font-size: 16px;">There is no pending CoChair/s for this conference. Please invite a user of the system to be a CoChair</p>
+                <p style="font-size: 16px; padding-left:10px;">There is no pending CoChair/s for this conference. Please invite a user of the system to be a CoChair</p>
             @endif
         </div>
 

@@ -36,6 +36,7 @@ Route::get('/conf/{conf}/contactus', 'App\Http\Controllers\ConferenceController@
 Route::get('/conf/{conf}/payment', 'App\Http\Controllers\PaymentController@index')->middleware('auth');
 Route::post('/conf/{conf}/payment/upload', 'App\Http\Controllers\PaymentController@upload')->middleware('auth');
 Route::post('/delete-pop', 'App\Http\Controllers\PaymentController@delete')->name('delete-pop');
+Route::post('/conf/{conf}/payment/update-payment', 'App\Http\Controllers\PaymentController@update')->middleware('auth');
 
 Route::get('/conf/{conf}/committeemenu', 'App\Http\Controllers\ConferenceController@comenu')->middleware('auth');
 Route::get('/conf/{conf}/committeemenu/updateconf', 'App\Http\Controllers\ConferenceController@edit')->middleware('auth');
@@ -45,6 +46,7 @@ Route::get('/conf/{conf}/committeemenu/fees', 'App\Http\Controllers\FeesControll
 Route::post('/conf/{conf}/committeemenu/add-fees', 'App\Http\Controllers\FeesController@store')->middleware('auth');
 
 Route::get('conf/{conf}/committeemenu/participants', 'App\Http\Controllers\NormalParticipantController@participantlist')->middleware('auth');
+Route::get('/conf/{conf}/committeemenu/reviewer', 'App\Http\Controllers\ReviewerController@index')->middleware('auth');
 Route::get('/conf/{conf}/committeemenu/cochair', 'App\Http\Controllers\PCCoChairController@index')->middleware('auth');
 
 Route::get('/conf/{conf}/mypaper', 'App\Http\Controllers\ConferenceController@papermenu')->middleware('auth');

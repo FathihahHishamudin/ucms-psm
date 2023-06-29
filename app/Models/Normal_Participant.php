@@ -15,9 +15,19 @@ class Normal_Participant extends Model
                            'Conference_id',
                            'Payment_id',];
 
-        public function conference(): BelongsTo
+    public function conference(): BelongsTo
     {
         return $this->belongsTo(Conference::class, 'Conference_id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'User_id');
+    }
+
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class, 'Payment_id');
     }
 
 }

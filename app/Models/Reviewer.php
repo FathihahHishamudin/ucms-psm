@@ -26,4 +26,9 @@ class Reviewer extends Model
     {
         return $this->hasMany(Reviews::class, 'Reviewer_id');
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'User_id');
+    }
 }

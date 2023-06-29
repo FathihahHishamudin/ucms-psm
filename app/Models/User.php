@@ -68,6 +68,11 @@ class User extends Authenticatable
         return $this->hasMany(PC_Chair::class);
     }
 
+    public function nparticipant(): HasMany
+    {
+        return $this->hasMany(Normal_Participant::class, 'User_id');
+    }
+
     public function authors(): HasMany
     {
         return $this->hasMany(Author::class, 'User_id');
@@ -81,5 +86,10 @@ class User extends Authenticatable
     public function assgcochair(): HasMany
     {
         return $this->hasMany(assignCochair::class, 'User_id');
+    }
+
+    public function reviewer(): HasMany
+    {
+        return $this->hasMany(Reviewer::class, 'User_id');
     }
 }
