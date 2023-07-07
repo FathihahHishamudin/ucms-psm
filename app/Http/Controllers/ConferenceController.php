@@ -42,28 +42,11 @@ class ConferenceController extends Controller
 
         $conf->save();
 
-        //area of interest
-            // Retrieve the trimmed values from the request
-            $trimmedValues = $request->input('cinterest');
-            
-            // Split the values by comma
-            $valuesArray = explode(',', $trimmedValues);
-            
-            // Trim each value to remove leading/trailing spaces
-            $trimmedValues = array_map('trim', $valuesArray);
-            
-            // Insert each value as a new row in the table
-            foreach ($trimmedValues as $value) {
-                AreaofInterest::create([
-                    'Conference_id' => $conf->id,
-                    'AoI_name' => $value
-                ]);
-            }
-
+        
         $chair = new PC_Chair();
         $chair->User_id = Auth::user()->id;
 
-        $chair->Conference_id = $conf->id;
+        $chair->Conference_id = $conf->Conference_id;
 
         $chair->save();
 

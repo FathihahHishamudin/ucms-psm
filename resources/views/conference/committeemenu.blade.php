@@ -45,7 +45,7 @@
                     <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/participants' }}"><i class="bi bi-people-fill"></i><b>&nbsp; &nbsp; Conference Participants</b></a>
                 </div>
                 <div class="pcmenu list">
-                    <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/updateconf' }}"><i class="bi bi-file-earmark-text-fill"></i><b>&nbsp; &nbsp; Conference Papers</b></a>
+                    <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/papers' }}"><i class="bi bi-file-earmark-text-fill"></i><b>&nbsp; &nbsp; Conference Papers</b></a>
                 </div>
                 <div class="pcmenu list">
                     <a class="desc mt40 mb60" href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/reviewer' }}"><i class="bi bi-person-lines-fill"></i><b>&nbsp; &nbsp; Conference Reviewers</b></a>

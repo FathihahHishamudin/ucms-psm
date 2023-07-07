@@ -50,12 +50,6 @@
                     <x-input class="form2-input" id="cvenue" type="text" name="cvenue" required />
                 </div>
 
-                <div class="form1">
-                    <x-label class="form2-label" for="cinterest" value="{{ __('Interest*') }}" />
-                    <!--<x-input class="form1-input" id="cinterest" type="text" name="cinterest" required />-->
-                    <x-input class="form2-input" type="text" id="cinterest" name="cinterest" placeholder="Enter multiple values separated by comma" required />
-                </div>
-
                 <div class="flex items-center justify-center mt-4 ">
                     
                     <x-button class="ml-4">
@@ -70,28 +64,6 @@
         
 
     </div>
-    <script>
-    // JavaScript code
-    var confinterest = document.getElementById('cinterest');
 
-    confinterest.addEventListener('blur', function() {
-        // Get the input value
-        var inputValue = confinterest.value;
-
-        // Split the values by comma
-        var valuesArray = inputValue.split(',');
-
-        // Trim each value to remove leading/trailing spaces
-        var trimmedValues = valuesArray.map(function(value) {
-            return value.trim();
-        });
-
-        // Display the trimmed values in the console
-        console.log(trimmedValues);
-
-        // You can now use the trimmedValues array to handle the individual values
-        // For example, you can send them to the server or perform other operations
-    });
-</script>
 </body>
 @endsection

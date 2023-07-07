@@ -92,4 +92,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reviewer::class, 'User_id');
     }
+
+    public function assgreviewer(): HasMany
+    {
+        return $this->hasMany(assignReviewer::class, 'User_id');
+    }
 }

@@ -84,19 +84,19 @@ class PaymentController extends Controller
         elseif ($nor){
             $payment = Payment::where('Payment_id', $nor->Payment_id)->first();
             if ($request->hasFile('proofpayment')) {
-                // Validate the uploaded file
+                // check betul tak file
                 $request->validate([
-                    'proofpayment' => 'required|mimes:jpeg,jpg,png,pdf|max:20480', // Adjust the maximum file size if needed
+                    'proofpayment' => 'required|mimes:jpeg,jpg,png,pdf|max:20480',
                 ]);
 
-                // Check if file is present
+                // check lagi..
                 if (!$request->hasFile('proofpayment')) {
                     return redirect()->back()->with('error', 'Please select a file to upload.');
                 }
 
-                // Store the uploaded file
+                // store the uploaded file nama jadi TFC4.LISTENER.{}.
                 $file = $request->file('proofpayment');
-                $payment->file=$conf->Conference_abbr."_LISTENER_".$nor->Participant_id."_ProofOfPayment.".$file->getClientOriginalExtension();   //save file to the database
+                $payment->file=$conf->Conference_abbr."_LISTENER_".$nor->Participant_id."_ProofOfPayment.".$file->getClientOriginalExtension();  
                 $file->move(\public_path("/upload/proofpayment"), $payment->file);
                 $request['proofpayment']=$payment->file;
                 $payment->payment_status = "Pending";

@@ -146,19 +146,21 @@
                                 <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
                                 <button type="submit">Delete</button>
                             </form>
+                            <a href="{{ asset('upload/papers/' . $paper->full_paper_br) }}" target="_blank">View Uploaded Full Paper (Blind Review)</a>
+                            <form method="POST" action="{{ route('delete') }}">
+                                @csrf
+                                <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
+                                <button type="submit">Delete</button>
+                            </form>
                         @else
                             <p>Please submit the full paper in <b>file type: PDF</b></p>
                             <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/upload' }}" enctype="multipart/form-data">
                                 @csrf
-                                <input type="file" id="fullpaper" name="fullpaper"><br>
-                                <button type="submit" id="uploadBtn" disabled autofocus>UPLOAD</button>
+                                <input type="file" id="fullpaper" name="fullpaper" required><br>
+                                <p>Please submit the full paper (Blind Review) in <b>file type: PDF</b></p>
+                                <input type="file" id="fullpaperbr" name="fullpaperbr" required><br>
+                                <button type="submit" id="uploadBtn" autofocus>UPLOAD</button>
                             </form>
-
-                            <script>
-                                document.getElementById('fullpaper').addEventListener('change', function() {
-                                    document.getElementById('uploadBtn').disabled = this.files.length === 0;
-                                });
-                            </script>
                         @endif
                     </div>
 

@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 /* Route::get('/trymail', 'App\Http\Controllers\MailController@try'); */
 Route::post('/conf/{conf}/addcochair', 'App\Http\Controllers\MailController@coChairInvitation')->middleware('auth');
-Route::get('/tryview', 'App\Http\Controllers\MailController@tryview');
+Route::post('/conf/{conf}/addreviewer/{pId}', 'App\Http\Controllers\MailController@reviewerInvitation')->middleware('auth');
+
 
 Route::get('/', 'App\Http\Controllers\ConferenceController@list');
 
@@ -49,6 +50,8 @@ Route::get('conf/{conf}/committeemenu/participants', 'App\Http\Controllers\Norma
 Route::get('/conf/{conf}/committeemenu/reviewer', 'App\Http\Controllers\ReviewerController@index')->middleware('auth');
 Route::get('/conf/{conf}/committeemenu/cochair', 'App\Http\Controllers\PCCoChairController@index')->middleware('auth');
 
+Route::get('/conf/{conf}/committeemenu/papers', 'App\Http\Controllers\PaperController@index')->middleware('auth');
+
 Route::get('/conf/{conf}/mypaper', 'App\Http\Controllers\ConferenceController@papermenu')->middleware('auth');
 Route::put('/conf/{conf}/mypaper/upd-paper-details/', 'App\Http\Controllers\PaperController@updatePaperDet')->middleware('auth');
 Route::post('/conf/{conf}/mypaper/upload', 'App\Http\Controllers\PaperController@upload')->middleware('auth');
@@ -67,8 +70,10 @@ Route::post('/cochairrole/decline', 'App\Http\Controllers\PCCoChairController@de
 Route::delete('/{conf}/delete-cochair/{coId}', 'App\Http\Controllers\PCCoChairController@deletecochair')->middleware('auth');
 Route::delete('/{conf}/delete-pending-cochair/{pcoId}', 'App\Http\Controllers\PCCoChairController@deletepending')->middleware('auth');
 
-
-
+Route::get('/conf/{conf}/committeemenu/papers/{pId}/infopage', 'App\Http\Controllers\PCChairController@infopage')->middleware('auth');
+Route::get('/conf/{conf}/committeemenu/papers/{pId}/subpage', 'App\Http\Controllers\PCChairController@subpage')->middleware('auth');
+Route::get('/conf/{conf}/committeemenu/papers/{pId}/statuspage', 'App\Http\Controllers\PCChairController@statuspage')->middleware('auth');
+Route::get('/conf/{conf}/committeemenu/papers/{pId}/reviewerpage', 'App\Http\Controllers\PCChairController@reviewerpage')->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',
