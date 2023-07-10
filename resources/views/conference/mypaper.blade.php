@@ -140,15 +140,11 @@
                         <div class="paperSubmitHeader">Full Paper Submission</div>
 
                         @if($paper->full_paper)
-                            <a href="{{ asset('upload/papers/' . $paper->full_paper) }}" target="_blank">View Uploaded Full Paper</a>
-                            <form method="POST" action="{{ route('delete') }}">
-                                @csrf
-                                <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
-                                <button type="submit">Delete</button>
-                            </form>
+                            <a href="{{ asset('upload/papers/' . $paper->full_paper) }}" target="_blank">View Uploaded Full Paper</a> <br>
                             <a href="{{ asset('upload/papers/' . $paper->full_paper_br) }}" target="_blank">View Uploaded Full Paper (Blind Review)</a>
                             <form method="POST" action="{{ route('delete') }}">
                                 @csrf
+                                <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
                                 <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
                                 <button type="submit">Delete</button>
                             </form>
@@ -156,7 +152,7 @@
                             <p>Please submit the full paper in <b>file type: PDF</b></p>
                             <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/upload' }}" enctype="multipart/form-data">
                                 @csrf
-                                <input type="file" id="fullpaper" name="fullpaper" required><br>
+                                <input style="margin-bottom: 10px;" type="file" id="fullpaper" name="fullpaper" required><br>
                                 <p>Please submit the full paper (Blind Review) in <b>file type: PDF</b></p>
                                 <input type="file" id="fullpaperbr" name="fullpaperbr" required><br>
                                 <button type="submit" id="uploadBtn" autofocus>UPLOAD</button>
@@ -179,17 +175,21 @@
                         <div class="paperSubmitHeader">Correction Paper Submission</div>
                         
                         @if($paper->Correction_fp)
-                            <a href="{{ asset('upload/papers/' . $paper->Correction_fp) }}" target="_blank">View Uploaded Correction Paper</a>
+                            <a href="{{ asset('upload/papers/' . $paper->Correction_fp) }}" target="_blank">View Uploaded Correction Paper</a> <br>
+                            <a href="{{ asset('upload/papers/' . $paper->Correction_fp_br) }}" target="_blank">View Uploaded Correction Paper (Blind Review)</a>
                             <form method="POST" action="{{ route('delete') }}">
                                 @csrf
                                 <input type="hidden" name="paper_id_cfp" value="{{ $paper->Paper_id }}">
+                                <input type="hidden" name="paper_id_cfpb" value="{{ $paper->Paper_id }}">
                                 <button type="submit">Delete</button>
                             </form>
                         @else
                             <p>Please submit the correction paper in <b>file type: PDF</b></p>
                             <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/upload' }}" enctype="multipart/form-data">
                                 @csrf
-                                <input type="file" id="corpaper" name="correctionpaper"><br>
+                                <input style="margin-bottom: 10px;" type="file" id="corpaper" name="correctionpaper" required><br>
+                                <p>Please submit the correction paper (Blind Review) in <b>file type: PDF</b></p>
+                                <input type="file" id="corpaperbr" name="correctionpaperbr" required><br>
                                 <button type="submit" id="uploadBtnCP" disabled>UPLOAD</button>
                             </form>
 

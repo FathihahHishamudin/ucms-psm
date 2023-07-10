@@ -93,8 +93,8 @@ class PaperController extends Controller
         if ($request->hasFile('fullpaper') && $request->hasFile('fullpaperbr')){
             // Validate the uploaded file
             $request->validate([
-                'fullpaper' => 'required|mimes:pdf|max:20480', // Adjust the maximum file size if needed
-                'fullpaperbr' => 'required|mimes:pdf|max:20480', // Adjust the maximum file size if needed
+                'fullpaper' => 'required|mimes:pdf|max:20480', 
+                'fullpaperbr' => 'required|mimes:pdf|max:20480', 
             ]);
 
             // Check if file is present
@@ -118,12 +118,23 @@ class PaperController extends Controller
             $filee->move(\public_path("/upload/papers"), $paper->full_paper_br);
             $request['fullpaperbr']=$paper->full_paper_br;
             $paper->save();
+
+            return redirect()->back()->with('success', 'Full Paper and Full Paper (Blind) have been uploaded successfully.');
         }
-        elseif ($request->hasFile('correctionpaper')) {
+        elseif ($request->hasFile('correctionpaper') && $request->hasFile('correctionpaperbr')) {
             // Validate the uploaded file
             $request->validate([
-                'correctionpaper' => 'required|mimes:pdf|max:20480', // Adjust the maximum file size if needed
+                'correctionpaper' => 'required|mimes:pdf|max:20480',
+                'correctionpaperbr' => 'required|mimes:pdf|max:20480',
             ]);
+
+            // Check if file is present
+            if (!$request->hasFile('correctionpaper')) {
+                return redirect()->back()->with('error', 'Please select a file to upload.');
+            }
+            if (!$request->hasFile('correctionpaperbr')) {
+                return redirect()->back()->with('error', 'Please select a file to upload.');
+            }
         
             // Store the uploaded file
             $file = $request->file('correctionpaper');
@@ -131,6 +142,15 @@ class PaperController extends Controller
             $file->move(\public_path("/upload/papers"), $paper->Correction_fp);
             $request['correctionpaper']=$paper->Correction_fp;
             $paper->save();
+        
+            // Store the uploaded file
+            $file = $request->file('correctionpaperbr');
+            $paper->Correction_fp_br=$conf->Conference_abbr."_".$aut->Author_id."_CFPBR.".$file->getClientOriginalExtension();   //save file to the database
+            $file->move(\public_path("/upload/papers"), $paper->Correction_fp_br);
+            $request['correctionpaperbr']=$paper->Correction_fp_br;
+            $paper->save();
+
+            return redirect()->back()->with('success', 'Correction Paper and Correction Paper (Blind) have been uploaded successfully.');
         }
         elseif ($request->hasFile('crpaper')) {
             // Validate the uploaded file
@@ -146,26 +166,31 @@ class PaperController extends Controller
             $paper->save();
         }
     
-        return redirect()->back()->with('success', 'Paper uploaded successfully.');
+        return redirect()->back()->with('error', 'Submitted paper is not uploaded.');
     }
 
     public function delete(Request $request)
     {
-        if ($request->hasAny('paper_id_fp')) {
+        if (($request->hasAny('paper_id_fp')) && ($request->hasAny('paper_id_fpb'))){
             $paperId = $request->input('paper_id_fp');
             $paper = Paper::find($paperId);
 
             if ($paper){
-                if ($paper->full_paper) {
+                if (($paper->full_paper) && ($paper->full_paper_br)) {
                     $file = public_path('upload/papers/'.$paper->full_paper);
+                    $fileb = public_path('upload/papers/'.$paper->full_paper_br);
                     if (file_exists($file)) {
                         unlink($file);
                     }
+                    if (file_exists($fileb)) {
+                        unlink($fileb);
+                    }
 
                     $paper->full_paper = null;
+                    $paper->full_paper_br = null;
                     $paper->save();
 
-                    return redirect()->back()->with('success', 'File fp deleted successfully!');
+                    return redirect()->back()->with('success', '[Full Paper] and [Full Paper (Blind)] deleted successfully!');
                 }
 
                 return "File not found or already deleted.";
@@ -173,22 +198,25 @@ class PaperController extends Controller
 
             return "Paper not found";
         }
-        elseif ($request->hasAny('paper_id_cfp'))
+        elseif (($request->hasAny('paper_id_cfp')) && ($request->hasAny('paper_id_cfpb')))
         {
             $paperId = $request->input('paper_id_cfp');
             $paper = Paper::find($paperId);
 
             if ($paper){
-                if ($paper->Correction_fp) {
+                if (($paper->Correction_fp) && ($paper->Correction_fp_br)) {
                     $file = public_path('upload/papers/'.$paper->Correction_fp);
-                    if (file_exists($file)) {
+                    $fileb = public_path('upload/papers/'.$paper->Correction_fp_br);
+                    if ((file_exists($file)) && (file_exists($fileb))) {
                         unlink($file);
+                        unlink($fileb);
                     }
 
                     $paper->Correction_fp = null;
+                    $paper->Correction_fp_br = null;
                     $paper->save();
 
-                    return redirect()->back()->with('success', 'File cfp deleted successfully!');
+                    return redirect()->back()->with('success', '[Correction Paper] and [Correction Paper (Blind)] deleted successfully!');
                 }
 
                 return "File not found or already deleted.";

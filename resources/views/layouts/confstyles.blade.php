@@ -298,17 +298,18 @@
         line-height: 37px;
         font-weight: bold;
         margin-top: 23px;
+        margin-bottom: 30px;
     }
     
     .paperSubmitBox p{
         font-size: 16px;
-        margin-top: 40px;
+        margin-top: 10px;
         margin-bottom: 10px;
     }
 
     .paperSubmitBox a{
         display: inline-block;
-        margin: 40px 0px 40px 0px;
+        margin: 0px 0px 40px 0px;
         text-decoration: underline;
         color: blue;
     }
