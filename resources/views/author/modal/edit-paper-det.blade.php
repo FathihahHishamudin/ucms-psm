@@ -1,5 +1,5 @@
 <!-- Form for add new hall -->
-<form action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/upd-paper-details/'}}" method="post" enctype="multipart/form-data">
+<form action="{{ url('/conf/'.$conf->Conference_abbr.'/mypaper/upd-paper-details/')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{ method_field('PUT') }}
     <!-- Modal container -->

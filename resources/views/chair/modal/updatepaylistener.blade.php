@@ -1,5 +1,5 @@
 @foreach($listnpar as $listnp)   
-    <form action="{{ url('/conf/'.$conf->Conference_abbr).'/payment/update-payment/'}}" method="post" enctype="multipart/form-data">
+    <form action="{{ url('/conf/'.$conf->Conference_abbr.'/payment/update-payment/')}}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <!-- Modal container -->
         <div class="modal fade" id="updPayModalB{{ $listnp->Participant_id }}" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="updPayModalB{{ $listnp->Participant_id }}Label">

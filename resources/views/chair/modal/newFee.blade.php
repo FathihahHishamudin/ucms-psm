@@ -1,5 +1,5 @@
 <!-- Form for add new hall -->
-<form action="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/add-fees/'}}" method="post" enctype="multipart/form-data">
+<form action="{{ url('/conf/'.$conf->Conference_abbr.'/committeemenu/add-fees/')}}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <!-- Modal container -->
     <div class="modal fade text-left" id="addFeeModal" tabindex="-1" role="dialog" aria-hidden="true">
