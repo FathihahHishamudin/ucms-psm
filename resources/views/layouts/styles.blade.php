@@ -21,7 +21,7 @@
             background: #FAFAFA;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             border-radius: 34px;
-            margin-top: 50px;
+            margin-top: 20px;
             margin-bottom: 50px;
             padding: 15px 25px 50px 25px;
         }

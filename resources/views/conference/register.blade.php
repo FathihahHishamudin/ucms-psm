@@ -34,7 +34,9 @@
         </div>
         
         @if($conffee->isEmpty())
-            cjaadnadcn
+            <div class="upddet mt-4">
+                <i class="text-danger bi bi-exclamation-lg"></i>Conference <b style="text-transform: uppercase;">{{$conf->Conference_name}}</b> is not open for registration yet. 
+            </div>
         @else
             <div class="page-info">
                 <p>Registration to <span style="text-transform: uppercase;"> {{ $conf->Conference_name }} </span> ({{ $conf->Conference_abbr }}) conference is now open!!
