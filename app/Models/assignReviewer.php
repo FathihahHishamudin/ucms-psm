@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class assignReviewer extends Model
 {
     use HasFactory;
-    public $table = 'assign_reviewer';
+    protected $table = 'assign_reviewer';
     protected $fillable = ['Conference_id',
                             'Paper_id', 
                             'User_id',
@@ -19,5 +19,15 @@ class assignReviewer extends Model
     public function user():BelongsTo
     {
         return $this->belongsTo(User::class, 'User_id');
+    }
+
+    public function conference():BelongsTo
+    {
+        return $this->belongsTo(Conference::class, 'Conference_id');
+    }
+
+    public function paper():BelongsTo
+    {
+        return $this->belongsTo(Paper::class, 'Paper_id');
     }
 }

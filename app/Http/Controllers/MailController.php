@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Support\Facades\DB;
 use App\Mail\InviteReviewer;
+use Carbon\Carbon;
 use Swift_Events_SendEvent;
 
 class MailController extends Controller
@@ -74,7 +75,7 @@ class MailController extends Controller
             $message = 'Email sent successfully';
             if ($status == "success") {
                 // Step 6: Add a row in assign_cochair table
-                AssignCoChair::create([
+                AssignCochair::create([
                     'Conference_id' => $confe->Conference_id,
                     'User_id' => $user->id,
                     'status' => 'Pending',
@@ -147,13 +148,15 @@ class MailController extends Controller
             Mail::to($user->email)->send(new InviteReviewer($user, $confe, $paper));
             $status = 'success';
             $message = 'Email sent successfully';
+            $dueDate = Carbon::now()->addDays(7)->toDateString();
             if ($status == "success") {
                 // Step 6: Add a row in assign_reviewer table
                 assignReviewer::create([
                     'Conference_id' => $confe->Conference_id,
-                    'Paper_id' => $paper->id,
+                    'Paper_id' => $paper->Paper_id,
                     'User_id' => $user->id,
                     'status' => 'Pending',
+                    'due' => $dueDate,
                 ]);
     
                 // Redirect the user to the desired URL

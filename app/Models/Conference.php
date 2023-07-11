@@ -70,5 +70,10 @@ class Conference extends Model
         return $this->hasMany(assignCochair::class, 'Conference_id');
     }
 
+    public function assgreviewer(): HasMany
+    {
+        return $this->hasMany(assignReviewer::class, 'Conference_id');
+    }
+
 
 }

@@ -38,11 +38,11 @@ class InviteReviewer extends Mailable
     public function build()
     {
         return $this->view('emails.reviewerinvitation')
-            ->subject('Invitation to Review')
-            ->with([
-                'user' => $this->user,
-                'confe' => $this->confe,
-                'paper' => $this->paper,
-            ]);
+                    ->subject('Invitation to Review')
+                    ->with([
+                        'user' => $this->user,
+                        'confe' => $this->confe,
+                        'paper' => $this->paper,
+                    ]);
     } 
 }

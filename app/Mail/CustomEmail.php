@@ -37,6 +37,7 @@ class CustomEmail extends Mailable
     public function build()
     {
         return $this->view('emails.custom')
+                    ->subject('Invitation as PC Co-Chair')
                     ->with([
                         'user' => $this->user,
                         'confe' => $this->confe,

@@ -12,7 +12,7 @@
         <h4>Hello {{ $user->Salutation }} {{ $user->First_name }} {{ $user->Last_name }},</h4>
         <br>
         <p>We are honoured to invite you to review a paper that has been submitted to <span style="text-transform: uppercase; font-weight:bold;">{{$confe->Conference_name}} ({{$confe->Conference_abbr}})</span>. 
-        Please consider accepting the invitation and joining the conference as a PC Co-Chair. The details of the paper is as below:</p>
+        Please consider accepting the invitation and joining the conference as a Reviewer. The details of the paper is as below:</p>
         <table style="text-align: justify;">
             <tr>
                 <td><b>Paper title</b></td>

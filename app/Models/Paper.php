@@ -46,4 +46,9 @@ class Paper extends Model
         return $this->hasMany(Reviews::class, 'Paper_id');
     }
 
+    public function assgreviewer(): HasMany
+    {
+        return $this->hasMany(assignReviewer::class, 'Paper_id');
+    }
+
 }
