@@ -145,6 +145,17 @@ class PaymentController extends Controller
             $pay->update([
                 "payment_status" => $request->status,
             ]);
+
+            if($pay->payment_status == "Unpaid") {
+                if ($pay->file) {
+                    $file = public_path('upload/proofpayment/'.$pay->file);
+                    if (file_exists($file)) {
+                        unlink($file);
+                    }
+                    $pay->file = null;
+                    $pay->save();
+                }
+            }
             return redirect()->back()->with('success', 'Payment status updated successfully.');
         }
         else {

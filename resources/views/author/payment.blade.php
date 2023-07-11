@@ -62,11 +62,13 @@
                         <td class="kol-right">
                             @if ($payment->file)
                                 <a href="{{ asset('upload/proofpayment/' . $payment->file) }}" target="_blank">View Uploaded Proof of Payment</a>
-                                <form method="POST" action="{{ route('delete-pop') }}" style="display: inline; margin-left:10px">
-                                    @csrf
-                                    <input type="hidden" name="popId" value="{{ $payment->Payment_id }}">
-                                    <button id="delpopBtn" type="submit">Remove</button>
-                                </form>
+                                @if ($payment->payment_status != "Paid")
+                                    <form method="POST" action="{{ route('delete-pop') }}" style="display: inline; margin-left:10px">
+                                        @csrf
+                                        <input type="hidden" name="popId" value="{{ $payment->Payment_id }}">
+                                        <button id="delpopBtn" type="submit">Remove</button>
+                                    </form>
+                                @endif
                             @else
                                 <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/payment/upload' }}" enctype="multipart/form-data">
                                     @csrf
