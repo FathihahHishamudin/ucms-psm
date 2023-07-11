@@ -40,69 +40,102 @@
 
             <div class="m-4 text-lg">
                 Conference Committee can check the papers that has been submitted by Author <b>{{$paper->paperauthor->authoruser->Salutation}} {{$paper->paperauthor->authoruser->First_name}} {{$paper->paperauthor->authoruser->Last_name}}</b> <br>
-                Conference Committee is able to remove papers that has been submitted but doesn't match the needed format.
+                Conference Committee is able to remove papers that has been submitted but doesn't match the needed format. <br>
+                Paper that has been reviewed by reviewer can no longer be removed.
             </div>
 
             <hr class="new1">
 
             @if (!$paper->full_paper)
                 <div class="m-4 text-lg">
-                {{$paper->paperauthor->authoruser->Salutation}} {{$paper->paperauthor->authoruser->First_name}} {{$paper->paperauthor->authoruser->Last_name}} has not uploaded her full paper to the system.
+                {{$paper->paperauthor->authoruser->Salutation}} {{$paper->paperauthor->authoruser->First_name}} {{$paper->paperauthor->authoruser->Last_name}} has not uploaded his/her full paper to the system.
                 </div>
             @else
                 <table class="mt-5 table table-bordered" style="width: 90%; margin:auto;">
                     <tr>
                         <td><b>Full Paper</b></td>
                         <td><a href="{{ asset('upload/papers/' . $paper->full_paper) }}" target="_blank">View Uploaded Full Paper</a></td>
-                        <td style="background-color: maroon; color:white; font-weight:bold;">
-                            <form method="POST" action="{{ route('delete') }}" class="delete-form">
-                                @csrf
-                                <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
-                                <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
-                                <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
-                            </form>
-                        </td>
+                        @php $rfpstat = App\Http\Controllers\ReviewsController::getFPreviewstatus($paper);
+                        @endphp
+                        <form method="POST" action="{{ route('delete') }}" class="delete-form">
+                            @csrf
+                            <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
+                            <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
+                            @if($rfpstat == "belum")
+                                <td style="background-color: maroon; color:white; font-weight:bold;">
+                                    <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
+                                </td>
+                            @elseif($rfpstat == "dah")
+                                <td style="background-color: lightgrey; color:white; font-weight:bold;">
+                                    <button class="deleteBtn" style="width:100%; height:100%;" type="submit" disabled>DELETE</button>
+                                </td>
+                            @endif
+                        </form>
                     </tr>
                     @if($paper->full_paper_br != null)
                         <tr>
                             <td><b>Full Paper (For Blind Review)</b></td>
                             <td><a href="{{ asset('upload/papers/' . $paper->full_paper_br) }}" target="_blank">View Uploaded Full Paper (For Blind Review)</a></td>
-                            <td style="background-color: maroon; color:white; font-weight:bold;">
-                                <form method="POST" action="{{ route('delete') }}" class="delete-form">
-                                    @csrf
-                                    <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
-                                    <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
-                                    <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
-                                </form>
-                            </td>
+                            @php $rfpstat = App\Http\Controllers\ReviewsController::getFPreviewstatus($paper);
+                            @endphp
+                            <form method="POST" action="{{ route('delete') }}" class="delete-form">
+                                @csrf
+                                <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
+                                <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
+                                @if($rfpstat == "belum")
+                                    <td style="background-color: maroon; color:white; font-weight:bold;">
+                                        <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
+                                    </td>
+                                @elseif($rfpstat == "dah")
+                                    <td style="background-color: lightgrey; color:white; font-weight:bold;">
+                                        <button class="deleteBtn" style="width:100%; height:100%;" type="submit" disabled>DELETE</button>
+                                    </td>
+                                @endif
+                            </form>
                         </tr>
                     @endif
                     @if($paper->Correction_fp != null)
                         <tr>
                             <td><b>Correction Full Paper</b></td>
                             <td><a href="{{ asset('upload/papers/' . $paper->Correction_fp) }}" target="_blank">View Uploaded Correction Full Paper</a></td>
-                            <td style="background-color: maroon; color:white; font-weight:bold;">
-                                <form method="POST" action="{{ route('delete') }}" class="delete-form">
-                                    @csrf
-                                    <input type="hidden" name="paper_id_cfp" value="{{ $paper->Paper_id }}">
-                                    <input type="hidden" name="paper_id_cfpb" value="{{ $paper->Paper_id }}">
-                                    <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
-                                </form>
-                            </td>
+                            @php $rcfpstat = App\Http\Controllers\ReviewsController::getCFPreviewstatus($paper);
+                            @endphp
+                            <form method="POST" action="{{ route('delete') }}" class="delete-form">
+                                @csrf
+                                <input type="hidden" name="paper_id_cfp" value="{{ $paper->Paper_id }}">
+                                <input type="hidden" name="paper_id_cfpb" value="{{ $paper->Paper_id }}">
+                                @if($rcfpstat == "belum")
+                                    <td style="background-color: maroon; color:white; font-weight:bold;">
+                                        <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
+                                    </td>
+                                @elseif($rcfpstat == "dah")
+                                    <td style="background-color: lightgrey; color:white; font-weight:bold;">
+                                        <button class="deleteBtn" style="width:100%; height:100%;" type="submit" disabled>DELETE</button>
+                                    </td>
+                                @endif
+                            </form>
                         </tr>
                     @endif
                     @if($paper->Correction_fp_br != null)
                         <tr>
                             <td><b>Correction Full Paper (For Blind Review)</b></td>
                             <td><a href="{{ asset('upload/papers/' . $paper->Correction_fp_br) }}" target="_blank">View Uploaded Correction Full Paper (For Blind Review)</a></td>
-                            <td style="background-color: maroon; color:white; font-weight:bold;">
-                                <form method="POST" action="{{ route('delete') }}" class="delete-form">
-                                    @csrf
-                                    <input type="hidden" name="paper_id_cfp" value="{{ $paper->Paper_id }}">
-                                    <input type="hidden" name="paper_id_cfpb" value="{{ $paper->Paper_id }}">
-                                    <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
-                                </form>
-                            </td>
+                            @php $rcfpstat = App\Http\Controllers\ReviewsController::getCFPreviewstatus($paper);
+                            @endphp
+                            <form method="POST" action="{{ route('delete') }}" class="delete-form">
+                                @csrf
+                                <input type="hidden" name="paper_id_cfp" value="{{ $paper->Paper_id }}">
+                                <input type="hidden" name="paper_id_cfpb" value="{{ $paper->Paper_id }}">
+                                @if($rcfpstat == "belum")
+                                    <td style="background-color: maroon; color:white; font-weight:bold;">
+                                        <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
+                                    </td>
+                                @elseif($rcfpstat == "dah")
+                                    <td style="background-color: lightgrey; color:white; font-weight:bold;">
+                                        <button class="deleteBtn" style="width:100%; height:100%;" type="submit" disabled>DELETE</button>
+                                    </td>
+                                @endif
+                            </form>
                         </tr>
                     @endif
                     @if($paper->cr_paper != null)

@@ -142,12 +142,18 @@
                         @if($paper->full_paper)
                             <a href="{{ asset('upload/papers/' . $paper->full_paper) }}" target="_blank">View Uploaded Full Paper</a> <br>
                             <a href="{{ asset('upload/papers/' . $paper->full_paper_br) }}" target="_blank">View Uploaded Full Paper (Blind Review)</a>
-                            <form method="POST" action="{{ route('delete') }}">
-                                @csrf
-                                <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
-                                <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
-                                <button type="submit">Delete</button>
-                            </form>
+                            @php $rfpstat = App\Http\Controllers\ReviewsController::getFPreviewstatus($paper);
+                            @endphp
+                            @if($rfpstat == "belum")
+                                <form method="POST" action="{{ route('delete') }}">
+                                    @csrf
+                                    <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
+                                    <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            @elseif ($rfpstat == "dah")
+                                <p>This paper can no longer be removed as it has been reviewed by a reviewer.</p>
+                            @endif
                         @else
                             <p>Please submit the full paper in <b>file type: PDF</b></p>
                             <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/upload' }}" enctype="multipart/form-data">

@@ -121,6 +121,48 @@ class ReviewsController extends Controller
         return $paper;
     }
 
+    public static function getFPreviewstatus($pId) {
+        $paper = Paper::where('Paper_id', $pId->Paper_id)->first();
+        $rfpstat = "belum";
+
+        if($paper->review1_fp_id) {
+            $rev = Reviews::where('Review_id', $paper->review1_fp_id)->first();
+
+            if ($rev->status == "Reviewed") {
+                $rfpstat = "dah";
+            }
+        }
+        if($paper->review2_fp_id) {
+            $rev2 = Reviews::where('Review_id', $paper->review2_fp_id)->first();
+
+            if ($rev2->status == "Reviewed") {
+                $rfpstat = "dah";
+            }
+        }
+        return $rfpstat;
+    }
+
+    public static function getCFPreviewstatus($pId) {
+        $paper = Paper::where('Paper_id', $pId->Paper_id)->first();
+        $rcfpstat = "belum";
+
+        if($paper->review1_cfp_id) {
+            $rev = Reviews::where('Review_id', $paper->review1_cfp_id)->first();
+
+            if ($rev->status == "Reviewed") {
+                $rcfpstat = "dah";
+            }
+        }
+        if($paper->review2_cfp_id) {
+            $rev2 = Reviews::where('Review_id', $paper->review2_cfp_id)->first();
+
+            if ($rev2->status == "Reviewed") {
+                $rcfpstat = "dah";
+            }
+        }
+        return $rcfpstat;
+    }
+
     public function updateStatus(Request $request)
     {
         $statuses = $request->input('status');
