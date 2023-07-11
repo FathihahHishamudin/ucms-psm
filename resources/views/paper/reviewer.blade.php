@@ -68,20 +68,28 @@
             </div>
 
             <div class="cochair-list-box">
-                <div class="ca-head my-2">Reviewer </div>
+                <div class="ca-head my-2">Pending Reviewer </div>
                 
                 @if ($pcount > 0)
-                    <table class="table table-bordered coch-table">
+                    
+                    <p style="font-size: 16px; padding-left:10px;">There can only be 2 reviewers assigned to a conference paper. Remove the pending reviewer if you want to invite other reviewer.</p> <br>
+                    <table class="table table-bordered coch-table" style="width: 90%;">
                         <tr>
                             <th class="coch-table-left">Pending Full Name</th>
                             <th>Email</th>
                             <th>Status</th>
+                            <th>Remove</th>
                         </tr>
                         @foreach ($p as $rv)
                             <tr>
                                 <td class="coch-table-left">{{$rv->user->First_name}} {{$rv->user->Last_name}}</td>
                                 <td>{{$rv->user->email}}</td>
                                 <td>{{$rv->status}}</td>
+                                <form action="{{ url($conf->Conference_abbr.'/delete-assgreviewer/'.$rv->id) }}" method="post">
+                                    {{csrf_field()}}
+                                    {{ method_field('DELETE') }}
+                                    <td><button type="submit" onclick="return confirm('Are you sure you want to delete the Pending Reviewer?');" title="Pending Reviewer Delete"><i class="bi bi-trash"></i></button></td>
+                                </form>
                             </tr>
                         @endforeach
                     </table>
@@ -90,28 +98,34 @@
                 @endif
             </div>
 
-            <div class="cochair-list-box">
-                <div class="ca-head my-2">Reviewer </div>
+            @if ($rcount > 0)
+                <div class="cochair-list-box">
+                    <div class="ca-head my-2">Rejected Reviewer </div>
+                    
+                    <p style="font-size: 16px; padding-left:10px;">Please remove the rejected reviewer to be able to invite reviewer.</p> <br>
                 
-                @if ($rcount > 0)
-                    <table class="table table-bordered coch-table">
+                    <table class="table table-bordered coch-table" style="width: 90%;">
                         <tr>
                             <th class="coch-table-left">Reject Reviewer Full Name</th>
                             <th>Email</th>
                             <th>Status</th>
+                            <th>Remove</th>
                         </tr>
                         @foreach ($r as $rv)
                             <tr>
                                 <td class="coch-table-left">{{$rv->user->First_name}} {{$rv->user->Last_name}}</td>
                                 <td>{{$rv->user->email}}</td>
                                 <td>{{$rv->status}}</td>
+                                <form action="{{ url($conf->Conference_abbr.'/delete-assgreviewer/'.$rv->id) }}" method="post">
+                                    {{csrf_field()}}
+                                    {{ method_field('DELETE') }}
+                                    <td><button type="submit" onclick="return confirm('Are you sure you want to delete the Rejected Reviewer?');" title="Rejected Reviewer Delete"><i class="bi bi-trash"></i></button></td>
+                                </form>
                             </tr>
                         @endforeach
                     </table>
-                @else
-                    <p style="font-size: 16px; padding-left:10px;">There are no rejected reviewers for this conference. Please invite at most 2 users of the system to be a Reviewer.</p>
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
         @if(($acount+$pcount+$rcount)<2 && ($paper->full_paper))
             <div class="cochair-assign">

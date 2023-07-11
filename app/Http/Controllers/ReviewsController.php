@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\assignReviewer;
 use App\Models\Conference;
 use App\Models\Paper;
+use App\Models\PC_Chair;
+use App\Models\PC_CoChair;
 use App\Models\Reviewer;
 use App\Models\Reviews;
 use App\Models\User;
@@ -111,7 +113,7 @@ class ReviewsController extends Controller
 
             return view('reviewer.acceptance', compact('assg', 'ada'));
         }
-        return response(['error' => true, 'error-msg' => 'Not found'], 404);
+        return redirect('/')->with('error', 'Unauthorized Access!');
     }
 
     public static function getpaper($pId) {
@@ -129,7 +131,7 @@ class ReviewsController extends Controller
                 ->where('id', '=', $assignId)
                 ->update(['status' => $statuses[$index]]);
 
-            $assign = DB::table('assign_reviewer')->where('id', $assignId)->first();
+            $assign = AssignReviewer::find($assignId);
             $paperId = $assign->Paper_id;
 
             $paper = Paper::find($paperId);
@@ -181,8 +183,25 @@ class ReviewsController extends Controller
                         $paper->update(["r2_id" => $rev->Reviewer_id, "review2_fp_id" =>$revipa->Review_id,]);
                     }
                 }
+                //delete row in assgreviewer table
+                $assign->delete();
             }
         }
         return redirect()->back()->with('success', 'Status updated successfully.');
+    }
+
+    public function deleteassg ($abbr, $rId)
+    {
+        $conf = Conference::where('Conference_abbr', $abbr)->first();
+        $chair = PC_Chair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+        $cochair = PC_CoChair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+
+        if ($chair || $cochair) {
+
+            assignReviewer::find($rId)->delete();
+            return redirect()->back()->with('success', 'You have successfully remove the the invited reviewer!');
+        }
+
+        return redirect()->back()->with('error', 'Unable to remove the invited reviewer!');
     }
 }
