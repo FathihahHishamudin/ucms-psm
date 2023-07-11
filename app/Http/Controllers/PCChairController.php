@@ -142,4 +142,31 @@ class PCChairController extends Controller
                                         'a'=>$a, 'p'=>$p, 'r'=>$r, 'count'=> $count]);
         
     }
+
+    public static function getreviewerA($id){
+        $paper = Paper::where ('Paper_id', $id)->first();
+        $raccept = null;
+
+        if($paper->r1_id && $paper->r2_id) {
+            $raccept = 2;
+        } elseif ($paper->r1_id || $paper->r2_id) {
+            $raccept = 1;
+        } else {
+            $raccept = 0;
+        }
+        
+        return $raccept;
+    }
+    public static function getreviewerP($id){
+        $paper = Paper::where ('Paper_id', $id)->first();
+        $rpending = assignReviewer::where('Paper_id', $paper->Paper_id)->where('Conference_id', $paper->Conference_id)->where('status', "Pending")->count();
+
+        return $rpending;        
+    }
+    public static function getreviewerD($id){
+        $paper = Paper::where ('Paper_id', $id)->first();
+        $rdecline = assignReviewer::where('Paper_id', $paper->Paper_id)->where('Conference_id', $paper->Conference_id)->where('status', "Reject")->count();
+
+        return $rdecline;
+    }
 }

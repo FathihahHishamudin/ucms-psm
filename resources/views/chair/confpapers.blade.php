@@ -65,15 +65,15 @@
                                 @endif
                                 </a>
                             </td>
+                            @php $raccept = App\Http\Controllers\PCChairController::getreviewerA($listpaper->Paper_id);
+                            @endphp
+                            @php $rpending = App\Http\Controllers\PCChairController::getreviewerP($listpaper->Paper_id);
+                            @endphp
+                            @php $rdecline = App\Http\Controllers\PCChairController::getreviewerD($listpaper->Paper_id);
+                            @endphp
                             <td class="align-middle" style="width: 10%;"><a href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/papers/'.$listpaper->Paper_id.'/reviewerpage' }}">
-                                @if($listpaper->r1_id && $listpaper->r2_id)
-                                    2(0|0)
-                                @elseif ($listpaper->r1_id || $listpaper->r2_id)
-                                    1(1|0)
-                                @else
-                                    0(0|0)
-                                @endif
-                            </i></a></td>
+                                {{$raccept}}({{$rpending}}|{{$rdecline}})
+                            </a></td>
                         </tr>
 
                     @endforeach
