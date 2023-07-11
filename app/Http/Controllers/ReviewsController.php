@@ -78,8 +78,9 @@ class ReviewsController extends Controller
     }
 
     public static function getFPReviewID($p) {
-        $revfp = Reviews::where('Review_id', $p->review1_fp_id)
-                        ->orWhere('Review_id', $p->review2_fp_id)
+        $reviewer = Reviewer::where('User_id', Auth::user()->id)->first();
+        $revfp = Reviews::where('Review_id', $p->review1_fp_id)->where('Reviewer_id', $reviewer->Reviewer_id)
+                        ->orWhere('Review_id', $p->review2_fp_id)->where('Reviewer_id', $reviewer->Reviewer_id)
                         ->first();
 
         return $revfp;
