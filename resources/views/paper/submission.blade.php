@@ -57,6 +57,7 @@
                         <td style="background-color: maroon; color:white; font-weight:bold;">
                             <form method="POST" action="{{ route('delete') }}" class="delete-form">
                                 @csrf
+                                <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
                                 <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
                                 <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
                             </form>
@@ -69,6 +70,7 @@
                             <td style="background-color: maroon; color:white; font-weight:bold;">
                                 <form method="POST" action="{{ route('delete') }}" class="delete-form">
                                     @csrf
+                                    <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
                                     <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
                                     <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
                                 </form>
@@ -83,6 +85,7 @@
                                 <form method="POST" action="{{ route('delete') }}" class="delete-form">
                                     @csrf
                                     <input type="hidden" name="paper_id_cfp" value="{{ $paper->Paper_id }}">
+                                    <input type="hidden" name="paper_id_cfpb" value="{{ $paper->Paper_id }}">
                                     <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
                                 </form>
                             </td>
@@ -95,6 +98,7 @@
                             <td style="background-color: maroon; color:white; font-weight:bold;">
                                 <form method="POST" action="{{ route('delete') }}" class="delete-form">
                                     @csrf
+                                    <input type="hidden" name="paper_id_cfp" value="{{ $paper->Paper_id }}">
                                     <input type="hidden" name="paper_id_cfpb" value="{{ $paper->Paper_id }}">
                                     <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
                                 </form>
