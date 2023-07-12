@@ -91,23 +91,49 @@
                             <td><button id="tButton1">Submit</button></td>
                         @endif
                     @else
-                        <td><span class="text-green-600"><b>Submitted</b></span></td>
-                        <td><button id="tButton1">View</button></td>
+                        <td><span class="text-green-600"><b>Submitted</b></span>
+                        @if ($paper->stat_fp == null)
+                            (<span class="text-primary"><b>Pending</b></span>)
+                            </td>
+                            <td><button id="tButton1">View</button></td>
+                        @elseif ($paper->stat_fp == "Rejected")
+                            (<span class="text-danger"><b>Rejected</b></span>)
+                            </td>
+                            <td><button id="tButton1">View Review</button></td>
+                        @else
+                            (<span class="text-green-400"><b>{{$paper->stat_fp}}</b></span>)
+                            </td>
+                            <td><button id="tButton1">View Review</button></td>
+                        @endif
                     @endif
                 </tr>
                 <tr>
                     <td>Correction Paper Submission</td>
                     @if($paper->Correction_fp == null)
                         <td><span class="text-red-600"><b>None </b></span>(<span class="text-red-600"><b>-</b></span>)</td>
-                        @if($paper->full_paper == null)
+                        @if($paper->stat_fp == null || $paper->stat_fp == "Rejected" || $paper->stat_fp == "Strong Acceptance")
                             <td><button id="tButton2" disabled>Submit</button></td>
-                        @endif
-                        @if($paper->full_paper !== null) <!-- tak guna elseif sebab it doesn't work -->
+                        @elseif($paper->stat_fp == "Accepted" || $paper->stat_fp == "Weak Acceptance")
                             <td><button id="tButton2">Submit</button></td>
                         @endif
                     @else
-                        <td><span class="text-green-600"><b>Submitted</b></span></td>
-                        <td><button id="tButton2">View</button></td>
+                        <td><span class="text-green-600"><b>Submitted</b></span>
+                        @if ($paper->stat_fp == "Weak Acceptance" && $paper->stat_cfp == null)
+                            (<span class="text-primary"><b>Pending</b></span>)
+                            </td>
+                            <td><button id="tButton2">View</button></td>
+                        @elseif ($paper->stat_cfp == "Rejected")
+                            (<span class="text-danger"><b>{{$paper->stat_cfp}}</b></span>)
+                            </td>
+                            <td><button id="tButton2">View Review</button></td>
+                        @elseif ($paper->stat_cfp == "Accepted")
+                            (<span class="text-green-400"><b>{{$paper->stat_cfp}}</b></span>)
+                            </td>
+                            <td><button id="tButton2">View Review</button></td>
+                        @elseif ($paper->stat_fp == "Accepted")
+                            </td>
+                            <td><button id="tButton2">View</button></td>
+                        @endif
                     @endif
                     
                 </tr>
@@ -115,11 +141,18 @@
                     <td>Camera-Ready Paper Submission</td>
                     @if($paper->cr_paper == null)
                         <td><span class="text-red-600"><b>None </b></span>(<span class="text-red-600"><b>-</b></span>)</td>
-                        @if($paper->Correction_fp == null)
+                        @if(($paper->stat_fp == "Rejected") || ($paper->stat_fp == "Accepted" && $paper->Correction_fp == null) || ($paper->stat_fp == "Weak Acceptance" && $paper->Correction_fp == null) || ($paper->stat_fp == "Weak Acceptance" && $paper->stat_cfp == null))
                             <td><button id="tButton3" disabled>Submit</button></td>
-                        @endif
-                        @if($paper->Correction_fp !== null) <!-- tak guna elseif sebab it doesn't work -->
+                        @elseif($paper->stat_fp == "Strong Acceptance")
                             <td><button id="tButton3">Submit</button></td>
+                        @elseif($paper->stat_fp == "Accepted" && $paper->Correction_fp != null)
+                            <td><button id="tButton3">Submit</button></td>
+                        @elseif($paper->stat_fp == "Weak Acceptance" && $paper->stat_cfp != null)
+                            @if($paper->stat_cfp == "Accepted")
+                                <td><button id="tButton3">Submit</button></td>
+                            @elseif($paper->stat_cfp == "Rejected")
+                                <td><button id="tButton3" disabled>Submit</button></td>
+                            @endif
                         @endif
                     @else
                         <td><span class="text-green-600"><b>Submitted</b></span></td>
@@ -149,7 +182,7 @@
                                     @csrf
                                     <input type="hidden" name="paper_id_fp" value="{{ $paper->Paper_id }}">
                                     <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
-                                    <button type="submit">Delete</button>
+                                    <button type="submit" onclick="return confirm('Are you sure you want to Delete the paper?\nYou cannot undo your deletion.');">Delete</button>
                                 </form>
                             @elseif ($rfpstat == "dah" || $rfpstat == "sudah")
                                 <p>This paper can no longer be removed as it has been reviewed by a reviewer.</p>
@@ -165,6 +198,41 @@
                             </form>
                         @endif
                     </div>
+
+                    @if($paper->stat_fp)
+                        <div class="mt-5 papersec-boxhead">Full Paper Review</div>
+                        <div class="p-4" style="border: maroon 2px solid; border-radius:16px;">
+                            <div class="upddet">
+                                @if($paper->stat_fp == "Strong Acceptance")
+                                    <i class="text-danger bi bi-exclamation-lg"></i><i class="text-danger bi bi-exclamation-lg"></i>&nbsp; Author can directly upload the camera-ready paper to the system. 
+                                @elseif($paper->stat_fp == "Accepted")
+                                    <i class="text-danger bi bi-exclamation-lg"></i><i class="text-danger bi bi-exclamation-lg"></i>&nbsp; Author need to revise the paper based on Reviewers' comments and submit the correction full paper. The correction full paper won't be reviewed and Author can directly upload the camera-ready paper to the system. 
+                                @elseif($paper->stat_fp == "Weak Acceptance")
+                                    <i class="text-danger bi bi-exclamation-lg"></i><i class="text-danger bi bi-exclamation-lg"></i>&nbsp; Author need to revise the paper based on Reviewers' comments and submit the correction full paper. The correction full paper will be reviewed by the Reviewers before Author can upload the camera-ready paper to the system.
+                                @elseif($paper->stat_fp == "Rejected")
+                                    <i class="text-danger bi bi-exclamation-lg"></i><i class="text-danger bi bi-exclamation-lg"></i>&nbsp; Author's paper is rejected. Author cannot submit any papers to the system anymore. 
+                                @endif
+                            </div>
+                            <table class="table table-borderless text-lg">
+                                <tr >
+                                    <td style="text-align:right; width: 15%;"><b>Paper Status</b></td>
+                                    @if ($paper->stat_fp == "Rejected")
+                                        <td class="text-danger" style="text-align:justify;">: <b> {{$paper->stat_fp}}</b> </td>
+                                    @else
+                                        <td class="text-green-400" style="text-align:justify;">: <b> {{$paper->stat_fp}}</b> </td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;"><b>Reviewer 1 Comment</b></td>
+                                    <td style="text-align:justify;">: {{$paper->fpreview1->comment}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;"><b>Reviewer 2 Comment</b></td>
+                                    <td style="text-align:justify;">: {{$paper->fpreview2->comment}}</td>
+                                </tr>
+                            </table>                        
+                        </div>
+                    @endif
 
                 </div>
             </div>
@@ -183,12 +251,18 @@
                         @if($paper->Correction_fp)
                             <a href="{{ asset('upload/papers/' . $paper->Correction_fp) }}" target="_blank">View Uploaded Correction Paper</a> <br>
                             <a href="{{ asset('upload/papers/' . $paper->Correction_fp_br) }}" target="_blank">View Uploaded Correction Paper (Blind Review)</a>
-                            <form method="POST" action="{{ route('delete') }}">
-                                @csrf
-                                <input type="hidden" name="paper_id_cfp" value="{{ $paper->Paper_id }}">
-                                <input type="hidden" name="paper_id_cfpb" value="{{ $paper->Paper_id }}">
-                                <button type="submit">Delete</button>
-                            </form>
+                            @php $rcfpstat = App\Http\Controllers\ReviewsController::getCFPreviewstatus($paper);
+                            @endphp
+                            @if($rcfpstat == "belum")
+                                <form method="POST" action="{{ route('delete') }}">
+                                    @csrf
+                                    <input type="hidden" name="paper_id_cfp" value="{{ $paper->Paper_id }}">
+                                    <input type="hidden" name="paper_id_cfpb" value="{{ $paper->Paper_id }}">
+                                    <button type="submit" onclick="return confirm('Are you sure you want to Delete the paper?\nYou cannot undo your deletion.');">Delete</button>
+                                </form>
+                            @elseif ($rcfpstat == "dah" || $rcfpstat == "sudah")
+                                <p>This paper can no longer be removed as it has been reviewed by a reviewer.</p>
+                            @endif
                         @else
                             <p>Please submit the correction paper in <b>file type: PDF</b></p>
                             <form method="POST" action="{{ url('/conf/'.$conf->Conference_abbr).'/mypaper/upload' }}" enctype="multipart/form-data">
@@ -207,6 +281,37 @@
                         @endif
                     </div>
 
+                    @if($paper->stat_cfp)
+                        <div class="mt-5 papersec-boxhead">Correction Full Paper Review</div>
+                        <div class="p-4" style="border: maroon 2px solid; border-radius:16px;">
+                            <div class="upddet">
+                                @if($paper->stat_cfp == "Accepted")
+                                    <i class="text-danger bi bi-exclamation-lg"></i><i class="text-danger bi bi-exclamation-lg"></i>&nbsp; Author can upload the camera-ready paper to the system. 
+                                @elseif($paper->stat_cfp == "Rejected")
+                                    <i class="text-danger bi bi-exclamation-lg"></i><i class="text-danger bi bi-exclamation-lg"></i>&nbsp; Author's correction paper is rejected. Author cannot submit any papers to the system anymore. 
+                                @endif
+                            </div>
+                            <table class="table table-borderless text-lg">
+                                <tr >
+                                    <td style="text-align:right; width: 15%;"><b>Paper Status</b></td>
+                                    @if ($paper->stat_cfp == "Rejected")
+                                        <td class="text-danger" style="text-align:justify;">: <b> {{$paper->stat_cfp}}</b> </td>
+                                    @else
+                                        <td class="text-green-400" style="text-align:justify;">: <b> {{$paper->stat_cfp}}</b> </td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;"><b>Reviewer 1 Comment</b></td>
+                                    <td style="text-align:justify;">: {{$paper->cfpreview1->comment}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right;"><b>Reviewer 2 Comment</b></td>
+                                    <td style="text-align:justify;">: {{$paper->cfpreview2->comment}}</td>
+                                </tr>
+                            </table>                        
+                        </div>
+                    @endif
+
                 </div>
             </div>
 
@@ -224,7 +329,7 @@
                             <form method="POST" action="{{ route('delete') }}">
                                 @csrf
                                 <input type="hidden" name="paper_id_cr" value="{{ $paper->Paper_id }}">
-                                <button type="submit">Delete</button>
+                                <button type="submit" onclick="return confirm('Are you sure you want to Delete the paper?\nYou cannot undo your deletion.');">Delete</button>
                             </form>
                         @else
                             <p>Please submit the camera ready paper in <b>file type: PDF</b></p>

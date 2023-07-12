@@ -56,7 +56,6 @@
                                     @php $revfp =  App\Http\Controllers\ReviewsController::getFPReviewID($paper);
                                     @endphp
                                     <a href="{{ url('/conf/'.$conf->Conference_abbr.'/reviewermenu/'.$revfp->Review_id)}}">{{$revfp->status}} <br>( {{$revfp->p_status}} )</a>
-                                    
                                 </td>
                             @else
                                 <td class="w-1/5 px-4 py-1">N/A</td>
@@ -65,7 +64,7 @@
                                 <td class="w-1/5 px-4 py-1">
                                     @php $revcfp =  App\Http\Controllers\ReviewsController::getCFPReviewID($paper);
                                     @endphp
-                                    {{$revcfp->status}} ( {{$revcfp->p_status}} )
+                                    <a href="{{ url('/conf/'.$conf->Conference_abbr.'/reviewermenu/'.$revcfp->Review_id)}}">{{$revcfp->status}} <br> ( {{$revcfp->p_status}} )</a>
                                 </td>
                             @else
                                 <td class="w-1/5 px-4 py-1">N/A</td>

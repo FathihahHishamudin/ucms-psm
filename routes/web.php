@@ -75,6 +75,8 @@ Route::get('/conf/{conf}/committeemenu/papers/{pId}/infopage', 'App\Http\Control
 Route::get('/conf/{conf}/committeemenu/papers/{pId}/subpage', 'App\Http\Controllers\PCChairController@subpage')->middleware('auth');
 Route::get('/conf/{conf}/committeemenu/papers/{pId}/statuspage', 'App\Http\Controllers\PCChairController@statuspage')->middleware('auth');
 Route::put('/conf/{conf}/committeemenu/papers/{pId}/statuspage/update', 'App\Http\Controllers\PaperController@updatefinalstatus')->middleware('auth');
+Route::get('/conf/{conf}/committeemenu/papers/{pId}/statuspagecor', 'App\Http\Controllers\PCChairController@statuspagecor')->middleware('auth');
+Route::put('/conf/{conf}/committeemenu/papers/{pId}/statuspage/updatecor', 'App\Http\Controllers\PaperController@updatecorrectionstatus')->middleware('auth');
 Route::get('/conf/{conf}/committeemenu/papers/{pId}/reviewerpage', 'App\Http\Controllers\PCChairController@reviewerpage')->middleware('auth');
 
 Route::middleware([

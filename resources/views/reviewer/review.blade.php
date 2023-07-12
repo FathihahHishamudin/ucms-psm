@@ -50,7 +50,11 @@
             <tr>
                 <td class="w-1/5 px-4 py-2" style="text-align: right;">Download Paper :</td>
                 <td class="w-4/5 py-2">
-                    <a class="buttonlike" href="{{ asset('upload/papers/' . $paper->full_paper_br) }}" target="_blank">View the Manuscript</a>
+                    @if(($reviews->Review_id == $paper->review1_fp_id) || ($reviews->Review_id == $paper->review2_fp_id))
+                        <a class="buttonlike" href="{{ asset('upload/papers/' . $paper->full_paper_br) }}" target="_blank">View the Manuscript</a>
+                    @elseif(($reviews->Review_id == $paper->review1_cfp_id) || ($reviews->Review_id == $paper->review2_cfp_id))
+                        <a class="buttonlike" href="{{ asset('upload/papers/' . $paper->Correction_fp_br) }}" target="_blank">View the Manuscript</a>
+                    @endif
                 </td>
             </tr>
             <tr>

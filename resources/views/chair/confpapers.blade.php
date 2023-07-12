@@ -52,18 +52,26 @@
                             <td class="align-middle" style="width: 10%;"><a href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/papers/'.$listpaper->Paper_id.'/infopage' }}"><i class="bi bi-info-circle-fill"></i></a></td>
                             <td class="align-middle" style="width: 10%;"><a href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/papers/'.$listpaper->Paper_id.'/subpage' }}"><i class="bi bi-file-pdf-fill"></i></a></td>
                             <td class="align-middle" style="width: 10%;"><a href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/papers/'.$listpaper->Paper_id.'/statuspage' }}">
-                                @if ($listpaper->stat_fp == "Strong Acceptence")
-                                    <i class="bi bi-circle-fill text-success"></i>
+                                @if ($listpaper->stat_fp == "Strong Acceptance")
+                                    <i class="bi bi-circle-fill text-success"></i></a>
                                 @elseif ($listpaper->stat_fp == "Accepted")
-                                    <i class="bi bi-circle-fill text-info"></i>
-                                @elseif ($listpaper->stat_fp == "Weak Acceptence")
-                                    <i class="bi bi-circle-fill text-warning"></i>
+                                    <i class="bi bi-circle-fill text-success"></i></a>
+                                @elseif ($listpaper->stat_fp == "Weak Acceptance")
+                                    <i class="bi bi-circle-fill text-warning"></i></a>
+                                    <a href="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/papers/'.$listpaper->Paper_id.'/statuspagecor' }}">
+                                        @if ($listpaper->stat_cfp == "Accepted")
+                                            <i class="bi bi-circle-fill text-success"></i>
+                                        @elseif ($listpaper->stat_cfp == "Rejected")
+                                            <i class="bi bi-circle-fill text-danger"></i>
+                                        @else
+                                            <i class="bi bi-circle"></i></a>
+                                        @endif
+                                    </a>
                                 @elseif ($listpaper->stat_fp == "Rejected")
-                                    <i class="bi bi-circle-fill text-danger"></i>
+                                    <i class="bi bi-circle-fill text-danger"></i></a>
                                 @else
-                                    <i class="bi bi-circle"></i>
+                                    <i class="bi bi-circle"></i></a>
                                 @endif
-                                </a>
                             </td>
                             @php $raccept = App\Http\Controllers\PCChairController::getreviewerA($listpaper->Paper_id);
                             @endphp

@@ -47,4 +47,14 @@ class Reviews extends Model
         return $this->hasOne(Paper::class, 'review2_fp_id');
     }
 
+    public function cfppaper1(): HasOne
+    {
+        return $this->hasOne(Paper::class, 'review1_cfp_id');
+    }
+
+    public function cfppaper2(): HasOne
+    {
+        return $this->hasOne(Paper::class, 'review2_cfp_id');
+    }
+
 }

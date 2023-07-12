@@ -91,6 +91,32 @@ class PCChairController extends Controller
         
     }
 
+    public function statuspagecor ($abbr, $pId){
+        $conf = Conference::where('Conference_abbr', $abbr)->first();
+        $paper = Paper::where ('Paper_id', $pId)->first();
+
+        if (!$conf) {
+            return redirect()->back()->with('error', 'Conference not found.');
+        }
+
+        if (!$paper) {
+            return redirect()->back()->with('error', 'Paper not found.');
+        }
+
+        $ch = PC_Chair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+        $coch = PC_CoChair::where('User_id', Auth::user()->id)->where('Conference_id', $conf->Conference_id)->first();
+
+        if          ($ch != null)    {   $cfrole = "CHAIR";     }
+        elseif      ($coch != null)  {   $cfrole = "CO-CHAIR";  }
+        else                         {   $cfrole = null;        }
+        
+        if (!$cfrole) {
+            return redirect()->back()->with('error', 'Unauthorized access.');
+        }
+        return view('paper.statuscor', ['conf'=>$conf, 'paper'=> $paper, 'cfrole'=> $cfrole]);
+        
+    }
+
     public function reviewerpage ($abbr, $pId){
         $conf = Conference::where('Conference_abbr', $abbr)->first();
         $paper = Paper::where ('Paper_id', $pId)->first();

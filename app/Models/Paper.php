@@ -62,6 +62,16 @@ class Paper extends Model
         return $this->belongsTo(Reviews::class, 'review2_fp_id');
     }
 
+    public function cfpreview1(): BelongsTo
+    {
+        return $this->belongsTo(Reviews::class, 'review1_cfp_id');
+    }
+
+    public function cfpreview2(): BelongsTo
+    {
+        return $this->belongsTo(Reviews::class, 'review2_cfp_id');
+    }
+
 
 
 }

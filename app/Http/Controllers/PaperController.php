@@ -7,6 +7,7 @@ use App\Models\Conference;
 use App\Models\Paper;
 use App\Models\PC_Chair;
 use App\Models\PC_CoChair;
+use App\Models\Reviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -160,10 +161,12 @@ class PaperController extends Controller
         
             // Store the uploaded file
             $file = $request->file('crpaper');
-            $paper->cr_paper=time()."_".$aut->Author_id."_".$file->getClientOriginalName();   //save file to the database
+            $paper->cr_paper=$conf->Conference_abbr."_".$aut->Author_id."_CRPAPER.".$file->getClientOriginalExtension();   //save file to the database
             $file->move(\public_path("/upload/papers"), $paper->cr_paper);
             $request['crpaper']=$paper->cr_paper;
             $paper->save();
+
+            return redirect()->back()->with('success', 'Camera-Ready Paper has been uploaded successfully.');
         }
     
         return redirect()->back()->with('error', 'Submitted paper is not uploaded.');
@@ -238,7 +241,7 @@ class PaperController extends Controller
                     $paper->cr_paper = null;
                     $paper->save();
 
-                    return redirect()->back()->with('success', 'File crp deleted successfully!');
+                    return redirect()->back()->with('success', '[Camera-Ready Paper] deleted successfully!');
                 }
 
                 return "File not found or already deleted.";
@@ -246,6 +249,7 @@ class PaperController extends Controller
 
             return "Paper not found";
         }
+        return "File not found or already deleted.";
     }
 
     public function updatefinalstatus (Request $request, $abbr, $pId)
@@ -257,6 +261,38 @@ class PaperController extends Controller
             $paper->update([
                 "stat_fp" => $request->finalstatus,
             ]);
+
+            if ($paper->stat_fp == "Weak Acceptance") {
+                $revcfp1 = new Reviews();
+                $revcfp1->Paper_id = $paper->Paper_id;
+                $revcfp1->Reviewer_id = $paper->r1_id;
+                $revcfp1->save();
+
+                $revcfp2 = new Reviews();
+                $revcfp2->Paper_id = $paper->Paper_id;
+                $revcfp2->Reviewer_id = $paper->r2_id;
+                $revcfp2->save();
+
+                $paper->update(["review1_cfp_id" =>$revcfp1->Review_id, "review2_cfp_id" =>$revcfp2->Review_id,]);
+                return redirect()->back()->with('success', 'Paper Final Status updated successfully. Associated reviews has been created.');
+
+            }
+
+            return redirect()->back()->with('success', 'Paper Final Status updated successfully.');
+        }
+        return redirect()->back()->with('error', 'Paper Final Status is not updated');
+    }
+
+    public function updatecorrectionstatus(Request $request, $abbr, $pId)
+    {
+        $conf = Conference::where('Conference_abbr', $abbr)->first();
+        $paper = Paper::where('Paper_id', $pId)->first();
+
+        if ($conf && $paper) {
+            $paper->update([
+                "stat_cfp" => $request->correctionfinalstatus,
+            ]);
+
             return redirect()->back()->with('success', 'Paper Final Status updated successfully.');
         }
         return redirect()->back()->with('error', 'Paper Final Status is not updated');

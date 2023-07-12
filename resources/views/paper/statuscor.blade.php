@@ -35,7 +35,7 @@
 
         <div class="papersec-box">
             <div class="pdet-header-line">
-                INFORMATION ON CONFERENCE PAPER STATUS   ({{$paper->conference->Conference_abbr}}-{{$paper->Paper_id}})
+                [CORRECTION PAPER] INFORMATION ON CONFERENCE PAPER STATUS   ({{$paper->conference->Conference_abbr}}-{{$paper->Paper_id}})
             </div>
             <div class="m-4 text-lg">
                 Conference Committee need to give <b>FINAL STATUS</b> to the paper based on the reviews given by the reviewers.<br>
@@ -44,58 +44,54 @@
 
             <hr class="new1">
 
-            <div class="finalstatusfp">
+            <div class="finalstatuscfp">
                 <div class="mt-4 text-lg" style="text-decoration: underline; text-align:center;">
-                    <b>FINAL STATUS (FULL PAPER)</b>
+                    <b>FINAL STATUS (CORRECTION FULL PAPER)</b>
                 </div>
                 <table class="mt-1 table table-bordered stat-tab" style="border-color: #9d6567;">
-                    @if($paper->review1_fp_id)
+                    @if($paper->review1_cfp_id)
                         <tr>
                             <td class="stat-tab-left" style="background-color: #6A1515;" rowspan="2"> Reviewer 1</td>
-                            <td>{{$paper->fpreview1->status}} ({{$paper->fpreview1->p_status}})</td>
-                            <td>Total Point: <b>{{$paper->fpreview1->total}}</b>/30</td>
+                            <td>{{$paper->cfpreview1->status}} ({{$paper->cfpreview1->p_status}})</td>
+                            <td>Total Point: <b>{{$paper->cfpreview1->total}}</b>/30</td>
                         </tr>
                         <tr>
-                            <td colspan="2">{{$paper->fpreview1->comment}}</td>
+                            <td colspan="2">{{$paper->cfpreview1->comment}}</td>
                         </tr>
                     @endif
-                    @if($paper->review2_fp_id)
+                    @if($paper->review2_cfp_id)
                         <tr>
                             <td class="stat-tab-left" style="background-color: #6A1515;" rowspan="2"> Reviewer 2</td>
-                            <td>{{$paper->fpreview2->status}} ({{$paper->fpreview2->p_status}})</td>
-                            <td>Total Point: <b>{{$paper->fpreview2->total}}</b>/30</td>
+                            <td>{{$paper->cfpreview2->status}} ({{$paper->cfpreview2->p_status}})</td>
+                            <td>Total Point: <b>{{$paper->cfpreview2->total}}</b>/30</td>
                         </tr>
                         <tr>
-                            <td colspan="2">{{$paper->fpreview2->comment}}</td>
+                            <td colspan="2">{{$paper->cfpreview2->comment}}</td>
                         </tr>
                     @endif
-                    @php $rfpstat = App\Http\Controllers\ReviewsController::getFPreviewstatus($paper);
+                    @php $rcfpstat = App\Http\Controllers\ReviewsController::getCFPreviewstatus($paper);
                     @endphp
-                    @if ($rfpstat == "sudah")
-                        @if($paper->stat_fp)
+                    @if ($rcfpstat == "sudah")
+                        @if($paper->stat_cfp)
                             <tr>
                                 <td class="stat-tab-left" style="background-color: #6A1515;" >FINAL STATUS</td>
                                 <td colspan="2" style="background-color: #9d6567;" >
-                                    <select name="finalstatus" id="finalstatus" disabled>
-                                        <option value="Strong Acceptance" {{ $paper->stat_fp == 'Strong Acceptance' ? 'selected' : '' }}>Strong Acceptance</option>
-                                        <option value="Accepted" {{ $paper->stat_fp == 'Accepted' ? 'selected' : '' }}>Accepted</option>
-                                        <option value="Weak Acceptance" {{ $paper->stat_fp == 'Weak Acceptance' ? 'selected' : '' }}>Weak Acceptance</option>
-                                        <option value="Rejected" {{ $paper->stat_fp == 'Rejected' ? 'selected' : '' }}>Rejected</option>
+                                    <select name="correctionfinalstatus" id="correctionfinalstatus" disabled>
+                                        <option value="Accepted" {{ $paper->stat_cfp == 'Accepted' ? 'selected' : '' }}>Accepted</option>
+                                        <option value="Rejected" {{ $paper->stat_cfp == 'Rejected' ? 'selected' : '' }}>Rejected</option>
                                     </select>
                                 </td>
                             </tr>
                         @else
                             <tr>
                                 <td class="stat-tab-left" style="background-color: #6A1515;" >FINAL STATUS</td>
-                                <form action="{{ url('/conf/'.$conf->Conference_abbr.'/committeemenu/papers/'.$paper->Paper_id.'/statuspage/update') }}" method="post" >
+                                <form action="{{ url('/conf/'.$conf->Conference_abbr.'/committeemenu/papers/'.$paper->Paper_id.'/statuspage/updatecor') }}" method="post" >
                                 {{ csrf_field() }}
                                 {{ method_field('PUT') }}
                                     <td colspan="2" style="background-color: #9d6567;" >
-                                        <select name="finalstatus" id="finalstatus" required>
+                                        <select name="correctionfinalstatus" id="correctionfinalstatus" required>
                                             <option value="" disabled selected>Select an option</option>
-                                            <option value="Strong Acceptance">Strong Acceptance</option>
                                             <option value="Accepted">Accepted</option>
-                                            <option value="Weak Acceptance">Weak Acceptance</option>
                                             <option value="Rejected">Rejected</option>
                                         </select>
 
