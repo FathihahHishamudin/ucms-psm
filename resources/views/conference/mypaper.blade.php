@@ -151,7 +151,7 @@
                                     <input type="hidden" name="paper_id_fpb" value="{{ $paper->Paper_id }}">
                                     <button type="submit">Delete</button>
                                 </form>
-                            @elseif ($rfpstat == "dah")
+                            @elseif ($rfpstat == "dah" || $rfpstat == "sudah")
                                 <p>This paper can no longer be removed as it has been reviewed by a reviewer.</p>
                             @endif
                         @else

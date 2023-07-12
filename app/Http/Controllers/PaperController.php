@@ -248,4 +248,18 @@ class PaperController extends Controller
         }
     }
 
+    public function updatefinalstatus (Request $request, $abbr, $pId)
+    {
+        $conf = Conference::where('Conference_abbr', $abbr)->first();
+        $paper = Paper::where('Paper_id', $pId)->first();
+
+        if ($conf && $paper) {
+            $paper->update([
+                "stat_fp" => $request->finalstatus,
+            ]);
+            return redirect()->back()->with('success', 'Paper Final Status updated successfully.');
+        }
+        return redirect()->back()->with('error', 'Paper Final Status is not updated');
+    }
+
 }

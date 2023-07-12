@@ -139,6 +139,15 @@ class ReviewsController extends Controller
                 $rfpstat = "dah";
             }
         }
+        
+        if($paper->review2_fp_id && $paper->review1_fp_id) {
+            $rev = Reviews::where('Review_id', $paper->review1_fp_id)->first();
+            $rev2 = Reviews::where('Review_id', $paper->review2_fp_id)->first();
+
+            if ($rev2->status == "Reviewed" && $rev->status == "Reviewed") {
+                $rfpstat = "sudah";
+            }
+        }
         return $rfpstat;
     }
 
@@ -158,6 +167,14 @@ class ReviewsController extends Controller
 
             if ($rev2->status == "Reviewed") {
                 $rcfpstat = "dah";
+            }
+        }
+        if($paper->review1_cfp_id && $paper->review2_cfp_id) {
+            $rev = Reviews::where('Review_id', $paper->review1_cfp_id)->first();
+            $rev2 = Reviews::where('Review_id', $paper->review2_cfp_id)->first();
+
+            if ($rev->status == "Reviewed" && $rev2->status == "Reviewed") {
+                $rcfpstat = "sudah";
             }
         }
         return $rcfpstat;

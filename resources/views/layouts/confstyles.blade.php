@@ -674,8 +674,17 @@
         padding: 25px 0px;
     }
 
-    /********************* END. PAYMENT MENU. ********************/
-    /********************* START. ADD COCHAIR MENU. ********************/
+    /********************* END. ADD COCHAIR MENU. ********************/
+    /********************* START. GIVE FINAL STATUS. ********************/
+    
+    .stat-tab {
+        font-size: 16px;
+        text-align: left;
+    }
 
-
+    .stat-tab-left {
+        text-align: center;
+        width: 20%;
+        color: white;
+    }    
 </style>

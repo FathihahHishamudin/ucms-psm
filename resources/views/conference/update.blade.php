@@ -34,7 +34,7 @@
         
             <!-- Container for edit form -->
             <div class="container shadow p-4 mt-4 rounded bg-white border-outline">
-                <form method="post" action="{{ url('/conf/'.$conf->Conference_abbr).'/committeemenu/updateconf'}}" enctype="multipart/form-data">
+                <form method="post" action="{{ url('/conf/'.$conf->Conference_abbr.'/committeemenu/updateconf')}}" enctype="multipart/form-data">
                 {{csrf_field()}}
                 {{ method_field('PUT') }}
                     <!--Conference's ID -->

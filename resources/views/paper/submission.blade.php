@@ -65,7 +65,7 @@
                                 <td style="background-color: maroon; color:white; font-weight:bold;">
                                     <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
                                 </td>
-                            @elseif($rfpstat == "dah")
+                            @elseif($rfpstat == "dah" || $rfpstat == "sudah")
                                 <td style="background-color: lightgrey; color:white; font-weight:bold;">
                                     <button class="deleteBtn" style="width:100%; height:100%;" type="submit" disabled>DELETE</button>
                                 </td>
@@ -86,7 +86,7 @@
                                     <td style="background-color: maroon; color:white; font-weight:bold;">
                                         <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
                                     </td>
-                                @elseif($rfpstat == "dah")
+                                @elseif($rfpstat == "dah" || $rfpstat == "sudah")
                                     <td style="background-color: lightgrey; color:white; font-weight:bold;">
                                         <button class="deleteBtn" style="width:100%; height:100%;" type="submit" disabled>DELETE</button>
                                     </td>
@@ -108,7 +108,7 @@
                                     <td style="background-color: maroon; color:white; font-weight:bold;">
                                         <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
                                     </td>
-                                @elseif($rcfpstat == "dah")
+                                @elseif($rcfpstat == "dah" || $rcfpstat == "sudah")
                                     <td style="background-color: lightgrey; color:white; font-weight:bold;">
                                         <button class="deleteBtn" style="width:100%; height:100%;" type="submit" disabled>DELETE</button>
                                     </td>
@@ -130,7 +130,7 @@
                                     <td style="background-color: maroon; color:white; font-weight:bold;">
                                         <button class="deleteBtn" style="width:100%; height:100%;" type="submit">DELETE</button>
                                     </td>
-                                @elseif($rcfpstat == "dah")
+                                @elseif($rcfpstat == "dah" || $rcfpstat == "sudah")
                                     <td style="background-color: lightgrey; color:white; font-weight:bold;">
                                         <button class="deleteBtn" style="width:100%; height:100%;" type="submit" disabled>DELETE</button>
                                     </td>

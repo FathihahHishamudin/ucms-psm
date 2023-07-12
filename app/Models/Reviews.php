@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Reviews extends Model
 {
@@ -34,6 +35,16 @@ class Reviews extends Model
     public function reviewer(): BelongsTo
     {
         return $this->belongsTo(Reviewer::class, 'Reviewer_id');
+    }
+
+    public function fppaper1(): HasOne
+    {
+        return $this->hasOne(Paper::class, 'review1_fp_id');
+    }
+
+    public function fppaper2(): HasOne
+    {
+        return $this->hasOne(Paper::class, 'review2_fp_id');
     }
 
 }

@@ -52,13 +52,11 @@
                         <tr>
                             <th class="coch-table-left">Reviewer Full Name</th>
                             <th>Email</th>
-                            <th>Status</th>
                         </tr>
                         @foreach ($a as $rv)
                             <tr>
                                 <td class="coch-table-left">{{$rv->user->First_name}} {{$rv->user->Last_name}}</td>
                                 <td>{{$rv->user->email}}</td>
-                                <td>Accept</td>
                             </tr>
                         @endforeach
                     </table>

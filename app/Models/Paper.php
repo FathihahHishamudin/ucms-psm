@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Paper extends Model
 {
@@ -50,5 +51,17 @@ class Paper extends Model
     {
         return $this->hasMany(assignReviewer::class, 'Paper_id');
     }
+
+    public function fpreview1(): BelongsTo
+    {
+        return $this->belongsTo(Reviews::class, 'review1_fp_id');
+    }
+
+    public function fpreview2(): BelongsTo
+    {
+        return $this->belongsTo(Reviews::class, 'review2_fp_id');
+    }
+
+
 
 }
