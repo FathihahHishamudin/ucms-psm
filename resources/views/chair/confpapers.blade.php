@@ -33,6 +33,71 @@
         <div class="header-line">
             <div class="header-font">CONFERENCE PAPER SUBMISSION</div>
         </div>
+        <div class="papersec-box text-lg" style="display: flex;">
+            <div style="width:60%;">
+                <div><u><b>STATUS COLUMN LEGEND</b></u></div>
+            
+                <table class="statlegend">
+                    <tr style="text-decoration: underline;">
+                        <td>SYMBOL</td>
+                        <td>FULL PAPER STATUS</td>
+                        <td>CORRECTION PAPER STATUS</td>
+                    </tr>
+                    <tr>
+                        <td><i class="bi bi-circle-fill text-success"></i></td>
+                        <td>Strong Acceptence/Accepted</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td><i class="bi bi-circle-fill text-warning"></i><i class="bi bi-circle-fill text-success"></i></td>
+                        <td>Weak Acceptence</td>
+                        <td>Accepted</td>
+                    </tr>
+                    <tr>
+                        <td><i class="bi bi-circle-fill text-warning"></i><i class="bi bi-circle-fill text-danger"></i></td>
+                        <td>Weak Acceptence</td>
+                        <td>Rejected</td>
+                    </tr>
+                    <tr>
+                        <td><i class="bi bi-circle-fill text-danger"></i></td>
+                        <td>Rejected</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td><i class="bi bi-circle"></i></td>
+                        <td>Not Yet Given</td>
+                        <td>N/A</td>
+                    </tr>
+                </table>
+            
+            </div>
+            <div class="d-flex" style="height: 200px; margin-right: 20px;">
+                <div class="vr"></div>
+            </div>
+            <div class="text-lg ml-4">
+                <div style="margin-bottom: 10px;"><u><b>REVIEWER COLUMN LEGEND</b></u></div>
+                <table class="ml-2 statlegend">
+                    <tr style="background-color: lightgray;">
+                        <td colspan="2">X ( Y | Z )</td>
+                    </tr>
+                    <tr>
+                        <td>X</td>
+                        <td>Number of <u>approved</u> reviewer</td>
+                    </tr>
+                    <tr>
+                        <td>Y</td>
+                        <td>Number of <u>pending</u> reviewer</td>
+                    </tr>
+                    <tr>
+                        <td>Z</td>
+                        <td>Number of <u>declined</u> reviewer</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <hr class="new1">
+        
 
         <div class="p-4">
             @if($listpapers)

@@ -686,5 +686,18 @@
         text-align: center;
         width: 20%;
         color: white;
-    }    
+    }   
+    
+    /********************* END. GIVE FINAL STATUS. ********************/
+    /********************* START. CONFERENCE PAPER LIST LEGEND STYLE. ********************/
+
+    .statlegend {
+        text-align: center;
+    }
+
+    .statlegend td {
+        padding: 4px 10px;
+    }
+
+    /********************* END. CONFERENCE PAPER LIST LEGEND STYLE. ********************/
 </style>
