@@ -33,8 +33,8 @@
         <div class="header-line">
             <div class="header-font">CONFERENCE PAPER SUBMISSION</div>
         </div>
-        <div class="papersec-box text-lg" style="display: flex;">
-            <div style="width:60%;">
+        <div class="text-lg" style="margin:20px; display: flex;">
+            <div style="width:60%; border-right:2px solid lightgrey;">
                 <div><u><b>STATUS COLUMN LEGEND</b></u></div>
             
                 <table class="statlegend">
@@ -71,10 +71,7 @@
                 </table>
             
             </div>
-            <div class="d-flex" style="height: 200px; margin-right: 20px;">
-                <div class="vr"></div>
-            </div>
-            <div class="text-lg ml-4">
+            <div class="text-lg" style="margin-left: 40px;">
                 <div style="margin-bottom: 10px;"><u><b>REVIEWER COLUMN LEGEND</b></u></div>
                 <table class="ml-2 statlegend">
                     <tr style="background-color: lightgray;">
